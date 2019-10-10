@@ -1,0 +1,194 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"hasInstallRule" : true,
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "WindStream",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "WindStream",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "openal-soft",
+					"childIndexes" : 
+					[
+						3
+					],
+					"hasInstallRule" : true,
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0.2"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "openal-soft",
+					"targetIndexes" : 
+					[
+						0,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7
+					]
+				},
+				{
+					"build" : "openal-soft/utils/alsoft-config",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.0.2"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 2,
+					"source" : "openal-soft/utils/alsoft-config"
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "WindStream",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"childIndexes" : 
+					[
+						2
+					],
+					"directoryIndexes" : 
+					[
+						2
+					],
+					"name" : "OpenAL",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						0,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						3
+					],
+					"name" : "alsoft-config",
+					"parentIndex" : 1
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 2,
+					"id" : "OpenAL::@9037191f12c8ede7fbae",
+					"jsonFile" : "target-OpenAL-Debug-42556960c31f1ea47622.json",
+					"name" : "OpenAL",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "WindStream::@fcd34dcf5c5a99afca71",
+					"jsonFile" : "target-WindStream-Debug-6e454cba58c9e02cf032.json",
+					"name" : "WindStream",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "alrecord::@9037191f12c8ede7fbae",
+					"jsonFile" : "target-alrecord-Debug-92655b737a4d709aa222.json",
+					"name" : "alrecord",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "altonegen::@9037191f12c8ede7fbae",
+					"jsonFile" : "target-altonegen-Debug-52f92b884ef77faacbfd.json",
+					"name" : "altonegen",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "build_version::@9037191f12c8ede7fbae",
+					"jsonFile" : "target-build_version-Debug-80a062fbf82b0989bc00.json",
+					"name" : "build_version",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "ex-common::@9037191f12c8ede7fbae",
+					"jsonFile" : "target-ex-common-Debug-0538b04255d0a93abffd.json",
+					"name" : "ex-common",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "native-tools::@9037191f12c8ede7fbae",
+					"jsonFile" : "target-native-tools-Debug-4393ae9ff34aad254e5a.json",
+					"name" : "native-tools",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "openal-info::@9037191f12c8ede7fbae",
+					"jsonFile" : "target-openal-info-Debug-1f3c1e8e8720b2af0ef4.json",
+					"name" : "openal-info",
+					"projectIndex" : 1
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "E:/Repos/WindStream/out/build/x64-Debug",
+		"source" : "E:/Repos/WindStream"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 0
+	}
+}

@@ -1,0 +1,4 @@
+E:/Repos/WindStream/out/build/x64-Debug/openal-soft/native-tools/CMakeFiles/bin2h.dir
+E:/Repos/WindStream/out/build/x64-Debug/openal-soft/native-tools/CMakeFiles/edit_cache.dir
+E:/Repos/WindStream/out/build/x64-Debug/openal-soft/native-tools/CMakeFiles/bsincgen.dir
+E:/Repos/WindStream/out/build/x64-Debug/openal-soft/native-tools/CMakeFiles/rebuild_cache.dir
