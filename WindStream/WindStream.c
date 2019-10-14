@@ -4,6 +4,14 @@
 #include "WindStream.h"
 
 int main() {
-	printf("Hello CMake!\n");
+	void* fp;
+	void* ptr = LoadLibrary("OpenAL32.dll");
+
+	if (ptr != NULL) fp = GetProcAddress(ptr, "alGenBuffers");
+
 	return 0;
+}
+
+void GetFunctionAddresses() {
+
 }

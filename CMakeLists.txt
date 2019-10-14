@@ -7,4 +7,4 @@ project ("WindStream")
 
 # Include sub-projects.
 add_subdirectory ("WindStream")
-add_subdirectory("openal-soft")
+add_subdirectory("OpenAL")

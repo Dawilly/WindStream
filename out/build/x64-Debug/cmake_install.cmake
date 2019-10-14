@@ -35,7 +35,7 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("E:/Repos/WindStream/out/build/x64-Debug/WindStream/cmake_install.cmake")
-  include("E:/Repos/WindStream/out/build/x64-Debug/openal-soft/cmake_install.cmake")
+  include("E:/Repos/WindStream/out/build/x64-Debug/OpenAL/cmake_install.cmake")
 
 endif()
 

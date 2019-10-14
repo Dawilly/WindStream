@@ -98,9 +98,17 @@ build cmake_object_order_depends_target_WindStream: phony || cmake_object_order_
 
 build WindStream\CMakeFiles\WindStream.dir\WindStream.c.obj: C_COMPILER__WindStream ..\..\..\WindStream\WindStream.c || cmake_object_order_depends_target_WindStream
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
-  INCLUDES = -I..\..\..\openal-soft\include
+  INCLUDES = -I..\..\..\WindStream\AudioHandler -I..\..\..\OpenAL\include
   OBJECT_DIR = WindStream\CMakeFiles\WindStream.dir
   OBJECT_FILE_DIR = WindStream\CMakeFiles\WindStream.dir
+  TARGET_COMPILE_PDB = WindStream\CMakeFiles\WindStream.dir\
+  TARGET_PDB = WindStream\WindStream.pdb
+
+build WindStream\CMakeFiles\WindStream.dir\AudioHandler\audiohandler.c.obj: C_COMPILER__WindStream ..\..\..\WindStream\AudioHandler\audiohandler.c || cmake_object_order_depends_target_WindStream
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  INCLUDES = -I..\..\..\WindStream\AudioHandler -I..\..\..\OpenAL\include
+  OBJECT_DIR = WindStream\CMakeFiles\WindStream.dir
+  OBJECT_FILE_DIR = WindStream\CMakeFiles\WindStream.dir\AudioHandler
   TARGET_COMPILE_PDB = WindStream\CMakeFiles\WindStream.dir\
   TARGET_PDB = WindStream\WindStream.pdb
 
@@ -112,10 +120,10 @@ build WindStream\CMakeFiles\WindStream.dir\WindStream.c.obj: C_COMPILER__WindStr
 #############################################
 # Link the executable WindStream\WindStream.exe
 
-build WindStream\WindStream.exe: C_EXECUTABLE_LINKER__WindStream WindStream\CMakeFiles\WindStream.dir\WindStream.c.obj | openal-soft\OpenAL32.lib || openal-soft\OpenAL32.dll
+build WindStream\WindStream.exe: C_EXECUTABLE_LINKER__WindStream WindStream\CMakeFiles\WindStream.dir\WindStream.c.obj WindStream\CMakeFiles\WindStream.dir\AudioHandler\audiohandler.c.obj | OpenAL\OpenAL32.lib || OpenAL\OpenAL32.dll
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
-  LINK_LIBRARIES = openal-soft\OpenAL32.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  LINK_LIBRARIES = OpenAL\OpenAL32.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
   OBJECT_DIR = WindStream\CMakeFiles\WindStream.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
@@ -186,18 +194,18 @@ build WindStream\list_install_components: phony
 #############################################
 # Utility command for edit_cache
 
-build openal-soft\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\out\build\x64-Debug\openal-soft && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+build OpenAL\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\out\build\x64-Debug\OpenAL && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
-build openal-soft\edit_cache: phony openal-soft\CMakeFiles\edit_cache.util
+build OpenAL\edit_cache: phony OpenAL\CMakeFiles\edit_cache.util
 
 
 #############################################
 # Utility command for build_version
 
-build openal-soft\build_version: phony openal-soft\CMakeFiles\build_version
+build OpenAL\build_version: phony OpenAL\CMakeFiles\build_version
 
 # =============================================================================
 # Object build statements for SHARED_LIBRARY target OpenAL
@@ -206,548 +214,494 @@ build openal-soft\build_version: phony openal-soft\CMakeFiles\build_version
 #############################################
 # Order-only phony target for OpenAL
 
-build cmake_object_order_depends_target_OpenAL: phony || openal-soft\bsinc_inc.h openal-soft\build_version openal-soft\default-44100.mhr.h openal-soft\default-48000.mhr.h openal-soft\native-tools
+build cmake_object_order_depends_target_OpenAL: phony || OpenAL\bsinc_inc.h OpenAL\build_version OpenAL\default-44100.mhr.h OpenAL\default-48000.mhr.h OpenAL\native-tools cmake_object_order_depends_target_common
 
-build openal-soft\CMakeFiles\OpenAL.dir\common\alcomplex.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\common\alcomplex.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\common
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\al\auxeffectslot.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\al\auxeffectslot.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\al
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\common\alexcpt.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\common\alexcpt.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\common
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\al\buffer.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\al\buffer.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\al
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\common\almalloc.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\common\almalloc.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\common
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\al\effect.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\al\effect.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\al
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\common\dynload.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\common\dynload.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\common
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\al\error.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\al\error.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\al
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\common\strutils.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\common\strutils.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\common
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\al\event.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\al\event.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\al
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\common\threads.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\common\threads.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\common
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\al\extension.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\al\extension.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\al
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\al\auxeffectslot.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\al\auxeffectslot.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\al
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\al\filter.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\al\filter.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\al
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\al\buffer.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\al\buffer.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\al
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\al\listener.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\al\listener.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\al
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\al\effect.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\al\effect.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\al
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\al\source.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\al\source.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\al
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\al\error.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\al\error.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\al
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\al\state.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\al\state.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\al
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\al\event.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\al\event.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\al
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\alc.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\alc.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\al\extension.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\al\extension.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\al
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\alu.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\alu.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\al\filter.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\al\filter.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\al
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\alconfig.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\alconfig.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\al\listener.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\al\listener.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\al
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\ambdec.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\ambdec.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\al\source.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\al\source.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\al
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\bformatdec.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\bformatdec.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\al\state.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\al\state.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\al
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\bs2b.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\bs2b.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\alc.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\alc.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\converter.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\converter.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\alu.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\alu.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\effects\autowah.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\effects\autowah.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\effects
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\alconfig.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\alconfig.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\effects\chorus.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\effects\chorus.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\effects
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\ambdec.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\ambdec.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\effects\compressor.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\effects\compressor.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\effects
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\bformatdec.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\bformatdec.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\effects\dedicated.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\effects\dedicated.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\effects
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\bs2b.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\bs2b.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\effects\distortion.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\effects\distortion.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\effects
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\converter.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\converter.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\effects\echo.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\effects\echo.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\effects
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\effects\autowah.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\effects\autowah.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\effects
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\effects\equalizer.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\effects\equalizer.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\effects
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\effects\chorus.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\effects\chorus.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\effects
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\effects\fshifter.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\effects\fshifter.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\effects
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\effects\compressor.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\effects\compressor.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\effects
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\effects\modulator.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\effects\modulator.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\effects
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\effects\dedicated.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\effects\dedicated.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\effects
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\effects\null.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\effects\null.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\effects
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\effects\distortion.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\effects\distortion.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\effects
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\effects\pshifter.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\effects\pshifter.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\effects
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\effects\echo.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\effects\echo.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\effects
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\effects\reverb.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\effects\reverb.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\effects
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\effects\equalizer.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\effects\equalizer.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\effects
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\effects\vmorpher.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\effects\vmorpher.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\effects
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\effects\fshifter.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\effects\fshifter.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\effects
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\filters\biquad.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\filters\biquad.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\filters
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\effects\modulator.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\effects\modulator.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\effects
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\filters\nfc.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\filters\nfc.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\filters
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\effects\null.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\effects\null.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\effects
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\filters\splitter.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\filters\splitter.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\filters
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\effects\pshifter.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\effects\pshifter.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\effects
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\helpers.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\helpers.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\effects\reverb.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\effects\reverb.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\effects
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\hrtf.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\hrtf.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\effects\vmorpher.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\effects\vmorpher.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\effects
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\mastering.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\mastering.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\filters\biquad.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\filters\biquad.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\filters
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\panning.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\panning.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\filters\nfc.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\filters\nfc.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\filters
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\ringbuffer.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\ringbuffer.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\filters\splitter.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\filters\splitter.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\filters
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\uhjfilter.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\uhjfilter.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\helpers.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\helpers.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\uiddefs.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\uiddefs.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\hrtf.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\hrtf.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\voice.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\voice.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\mastering.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\mastering.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\mixer\mixer_c.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\mixer\mixer_c.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\mixer
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\mixvoice.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\mixvoice.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\mixer\mixer_sse.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\mixer\mixer_sse.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\mixer
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\panning.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\panning.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\mixer\mixer_sse2.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\mixer\mixer_sse2.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\mixer
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\ringbuffer.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\ringbuffer.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\mixer\mixer_sse3.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\mixer\mixer_sse3.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\mixer
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\uhjfilter.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\uhjfilter.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\mixer\mixer_sse41.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\mixer\mixer_sse41.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\mixer
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\uiddefs.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\uiddefs.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\backends\base.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\backends\base.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\backends
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\mixer\mixer_c.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\mixer\mixer_c.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\mixer
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\backends\loopback.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\backends\loopback.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\backends
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\mixer\mixer_sse.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\mixer\mixer_sse.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\mixer
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\backends\null.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\backends\null.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\backends
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\mixer\mixer_sse2.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\mixer\mixer_sse2.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\mixer
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\backends\winmm.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\backends\winmm.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\backends
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\mixer\mixer_sse3.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\mixer\mixer_sse3.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\mixer
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\backends\dsound.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\backends\dsound.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\backends
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\mixer\mixer_sse41.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\mixer\mixer_sse41.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\mixer
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\backends\wasapi.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\backends\wasapi.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\backends
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\backends\base.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\backends\base.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\backends
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+build OpenAL\CMakeFiles\OpenAL.dir\alc\backends\wave.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\OpenAL\alc\backends\wave.cpp || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IOpenAL -I..\..\..\OpenAL -I..\..\..\OpenAL\alc -I..\..\..\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\alc\backends
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
-build openal-soft\CMakeFiles\OpenAL.dir\alc\backends\loopback.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\backends\loopback.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\backends
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
-
-build openal-soft\CMakeFiles\OpenAL.dir\alc\backends\null.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\backends\null.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\backends
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
-
-build openal-soft\CMakeFiles\OpenAL.dir\alc\backends\winmm.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\backends\winmm.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\backends
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
-
-build openal-soft\CMakeFiles\OpenAL.dir\alc\backends\dsound.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\backends\dsound.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\backends
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
-
-build openal-soft\CMakeFiles\OpenAL.dir\alc\backends\wasapi.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\backends\wasapi.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\backends
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
-
-build openal-soft\CMakeFiles\OpenAL.dir\alc\backends\wave.cpp.obj: CXX_COMPILER__OpenAL ..\..\..\openal-soft\alc\backends\wave.cpp || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -Iopenal-soft -I..\..\..\openal-soft -I..\..\..\openal-soft\alc -I..\..\..\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\alc\backends
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
-
-build openal-soft\CMakeFiles\OpenAL.dir\resources\openal32.rc.res: RC_COMPILER__OpenAL E$:\Repos\WindStream\openal-soft\resources\openal32.rc || cmake_object_order_depends_target_OpenAL
-  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  DEP_FILE = openal-soft\CMakeFiles\OpenAL.dir\resources\openal32.rc.res.d
+build OpenAL\CMakeFiles\OpenAL.dir\resources\openal32.rc.res: RC_COMPILER__OpenAL E$:\Repos\WindStream\OpenAL\resources\openal32.rc || cmake_object_order_depends_target_OpenAL
+  DEFINES = -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -DNOMINMAX -DOpenAL_EXPORTS -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  DEP_FILE = OpenAL\CMakeFiles\OpenAL.dir\resources\openal32.rc.res.d
   FLAGS = -DWIN32 -D_DEBUG
-  INCLUDES = -IE:\Repos\WindStream\openal-soft\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IE:\Repos\WindStream\out\build\x64-Debug\openal-soft -IE:\Repos\WindStream\openal-soft -IE:\Repos\WindStream\openal-soft\alc -IE:\Repos\WindStream\openal-soft\common
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\OpenAL.dir\resources
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+  INCLUDES = -IE:\Repos\WindStream\OpenAL\include -I"C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um" -IE:\Repos\WindStream\out\build\x64-Debug\OpenAL -IE:\Repos\WindStream\OpenAL -IE:\Repos\WindStream\OpenAL\alc -IE:\Repos\WindStream\OpenAL\common
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\OpenAL.dir\resources
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_PDB = OpenAL\OpenAL32.pdb
 
 
 # =============================================================================
@@ -755,26 +709,125 @@ build openal-soft\CMakeFiles\OpenAL.dir\resources\openal32.rc.res: RC_COMPILER__
 
 
 #############################################
-# Link the shared library openal-soft\OpenAL32.dll
+# Link the shared library OpenAL\OpenAL32.dll
 
-build openal-soft\OpenAL32.dll openal-soft\OpenAL32.lib: CXX_SHARED_LIBRARY_LINKER__OpenAL openal-soft\CMakeFiles\OpenAL.dir\common\alcomplex.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\common\alexcpt.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\common\almalloc.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\common\dynload.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\common\strutils.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\common\threads.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\al\auxeffectslot.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\al\buffer.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\al\effect.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\al\error.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\al\event.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\al\extension.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\al\filter.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\al\listener.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\al\source.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\al\state.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\alc.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\alu.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\alconfig.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\ambdec.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\bformatdec.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\bs2b.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\converter.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\effects\autowah.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\effects\chorus.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\effects\compressor.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\effects\dedicated.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\effects\distortion.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\effects\echo.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\effects\equalizer.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\effects\fshifter.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\effects\modulator.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\effects\null.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\effects\pshifter.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\effects\reverb.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\effects\vmorpher.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\filters\biquad.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\filters\nfc.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\filters\splitter.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\helpers.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\hrtf.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\mastering.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\mixvoice.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\panning.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\ringbuffer.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\uhjfilter.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\uiddefs.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\mixer\mixer_c.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\mixer\mixer_sse.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\mixer\mixer_sse2.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\mixer\mixer_sse3.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\mixer\mixer_sse41.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\backends\base.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\backends\loopback.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\backends\null.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\backends\winmm.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\backends\dsound.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\backends\wasapi.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\alc\backends\wave.cpp.obj openal-soft\CMakeFiles\OpenAL.dir\resources\openal32.rc.res | C$:\Program$ Files$ (x86)\Windows$ Kits\10\Lib\10.0.18362.0\um\x64\WinMM.Lib || openal-soft\build_version openal-soft\native-tools
+build OpenAL\OpenAL32.dll OpenAL\OpenAL32.lib: CXX_SHARED_LIBRARY_LINKER__OpenAL OpenAL\CMakeFiles\OpenAL.dir\al\auxeffectslot.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\al\buffer.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\al\effect.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\al\error.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\al\event.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\al\extension.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\al\filter.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\al\listener.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\al\source.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\al\state.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\alc.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\alu.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\alconfig.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\ambdec.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\bformatdec.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\bs2b.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\converter.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\effects\autowah.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\effects\chorus.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\effects\compressor.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\effects\dedicated.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\effects\distortion.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\effects\echo.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\effects\equalizer.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\effects\fshifter.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\effects\modulator.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\effects\null.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\effects\pshifter.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\effects\reverb.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\effects\vmorpher.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\filters\biquad.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\filters\nfc.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\filters\splitter.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\helpers.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\hrtf.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\mastering.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\panning.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\ringbuffer.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\uhjfilter.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\uiddefs.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\voice.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\mixer\mixer_c.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\mixer\mixer_sse.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\mixer\mixer_sse2.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\mixer\mixer_sse3.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\mixer\mixer_sse41.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\backends\base.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\backends\loopback.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\backends\null.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\backends\winmm.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\backends\dsound.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\backends\wasapi.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\alc\backends\wave.cpp.obj OpenAL\CMakeFiles\OpenAL.dir\resources\openal32.rc.res | OpenAL\common.lib C$:\Program$ Files$ (x86)\Windows$ Kits\10\Lib\10.0.18362.0\um\x64\WinMM.Lib || OpenAL\build_version OpenAL\common.lib OpenAL\native-tools
   LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL
-  LINK_LIBRARIES = "C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\um\x64\WinMM.Lib" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
-  OBJECT_DIR = openal-soft\CMakeFiles\OpenAL.dir
+  LINK_LIBRARIES = OpenAL\common.lib "C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\um\x64\WinMM.Lib" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  OBJECT_DIR = OpenAL\CMakeFiles\OpenAL.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
   RESTAT = 1
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\OpenAL.dir\
-  TARGET_FILE = openal-soft\OpenAL32.dll
-  TARGET_IMPLIB = openal-soft\OpenAL32.lib
-  TARGET_PDB = openal-soft\OpenAL32.pdb
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\OpenAL.dir\
+  TARGET_FILE = OpenAL\OpenAL32.dll
+  TARGET_IMPLIB = OpenAL\OpenAL32.lib
+  TARGET_PDB = OpenAL\OpenAL32.pdb
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target common
+
+
+#############################################
+# Order-only phony target for common
+
+build cmake_object_order_depends_target_common: phony || OpenAL\CMakeFiles\common.dir
+
+build OpenAL\CMakeFiles\common.dir\common\alcomplex.cpp.obj: CXX_COMPILER__common ..\..\..\OpenAL\common\alcomplex.cpp || cmake_object_order_depends_target_common
+  DEFINES = -DNOMINMAX -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -IOpenAL -I..\..\..\OpenAL\include
+  OBJECT_DIR = OpenAL\CMakeFiles\common.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\common.dir\common
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\common.dir\common.pdb
+  TARGET_PDB = OpenAL\common.pdb
+
+build OpenAL\CMakeFiles\common.dir\common\alexcpt.cpp.obj: CXX_COMPILER__common ..\..\..\OpenAL\common\alexcpt.cpp || cmake_object_order_depends_target_common
+  DEFINES = -DNOMINMAX -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -IOpenAL -I..\..\..\OpenAL\include
+  OBJECT_DIR = OpenAL\CMakeFiles\common.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\common.dir\common
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\common.dir\common.pdb
+  TARGET_PDB = OpenAL\common.pdb
+
+build OpenAL\CMakeFiles\common.dir\common\alfstream.cpp.obj: CXX_COMPILER__common ..\..\..\OpenAL\common\alfstream.cpp || cmake_object_order_depends_target_common
+  DEFINES = -DNOMINMAX -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -IOpenAL -I..\..\..\OpenAL\include
+  OBJECT_DIR = OpenAL\CMakeFiles\common.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\common.dir\common
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\common.dir\common.pdb
+  TARGET_PDB = OpenAL\common.pdb
+
+build OpenAL\CMakeFiles\common.dir\common\almalloc.cpp.obj: CXX_COMPILER__common ..\..\..\OpenAL\common\almalloc.cpp || cmake_object_order_depends_target_common
+  DEFINES = -DNOMINMAX -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -IOpenAL -I..\..\..\OpenAL\include
+  OBJECT_DIR = OpenAL\CMakeFiles\common.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\common.dir\common
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\common.dir\common.pdb
+  TARGET_PDB = OpenAL\common.pdb
+
+build OpenAL\CMakeFiles\common.dir\common\alstring.cpp.obj: CXX_COMPILER__common ..\..\..\OpenAL\common\alstring.cpp || cmake_object_order_depends_target_common
+  DEFINES = -DNOMINMAX -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -IOpenAL -I..\..\..\OpenAL\include
+  OBJECT_DIR = OpenAL\CMakeFiles\common.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\common.dir\common
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\common.dir\common.pdb
+  TARGET_PDB = OpenAL\common.pdb
+
+build OpenAL\CMakeFiles\common.dir\common\dynload.cpp.obj: CXX_COMPILER__common ..\..\..\OpenAL\common\dynload.cpp || cmake_object_order_depends_target_common
+  DEFINES = -DNOMINMAX -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -IOpenAL -I..\..\..\OpenAL\include
+  OBJECT_DIR = OpenAL\CMakeFiles\common.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\common.dir\common
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\common.dir\common.pdb
+  TARGET_PDB = OpenAL\common.pdb
+
+build OpenAL\CMakeFiles\common.dir\common\strutils.cpp.obj: CXX_COMPILER__common ..\..\..\OpenAL\common\strutils.cpp || cmake_object_order_depends_target_common
+  DEFINES = -DNOMINMAX -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -IOpenAL -I..\..\..\OpenAL\include
+  OBJECT_DIR = OpenAL\CMakeFiles\common.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\common.dir\common
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\common.dir\common.pdb
+  TARGET_PDB = OpenAL\common.pdb
+
+build OpenAL\CMakeFiles\common.dir\common\threads.cpp.obj: CXX_COMPILER__common ..\..\..\OpenAL\common\threads.cpp || cmake_object_order_depends_target_common
+  DEFINES = -DNOMINMAX -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1   /permissive- /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -IOpenAL -I..\..\..\OpenAL\include
+  OBJECT_DIR = OpenAL\CMakeFiles\common.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\common.dir\common
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\common.dir\common.pdb
+  TARGET_PDB = OpenAL\common.pdb
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target common
+
+
+#############################################
+# Link the static library OpenAL\common.lib
+
+build OpenAL\common.lib: CXX_STATIC_LIBRARY_LINKER__common OpenAL\CMakeFiles\common.dir\common\alcomplex.cpp.obj OpenAL\CMakeFiles\common.dir\common\alexcpt.cpp.obj OpenAL\CMakeFiles\common.dir\common\alfstream.cpp.obj OpenAL\CMakeFiles\common.dir\common\almalloc.cpp.obj OpenAL\CMakeFiles\common.dir\common\alstring.cpp.obj OpenAL\CMakeFiles\common.dir\common\dynload.cpp.obj OpenAL\CMakeFiles\common.dir\common\strutils.cpp.obj OpenAL\CMakeFiles\common.dir\common\threads.cpp.obj
+  LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  LINK_FLAGS = /machine:x64
+  OBJECT_DIR = OpenAL\CMakeFiles\common.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\common.dir\common.pdb
+  TARGET_FILE = OpenAL\common.lib
+  TARGET_PDB = OpenAL\common.pdb
 
 
 #############################################
 # Utility command for native-tools
 
-build openal-soft\native-tools: phony openal-soft\CMakeFiles\native-tools openal-soft\native-tools\bin2h openal-soft\native-tools\bsincgen
+build OpenAL\native-tools: phony OpenAL\CMakeFiles\native-tools OpenAL\native-tools\bin2h OpenAL\native-tools\bsincgen
 
 # =============================================================================
 # Object build statements for EXECUTABLE target openal-info
@@ -785,13 +838,13 @@ build openal-soft\native-tools: phony openal-soft\CMakeFiles\native-tools openal
 
 build cmake_object_order_depends_target_openal-info: phony || cmake_object_order_depends_target_OpenAL
 
-build openal-soft\CMakeFiles\openal-info.dir\utils\openal-info.c.obj: C_COMPILER__openal-info ..\..\..\openal-soft\utils\openal-info.c || cmake_object_order_depends_target_openal-info
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\common -I..\..\..\openal-soft\include
-  OBJECT_DIR = openal-soft\CMakeFiles\openal-info.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\openal-info.dir\utils
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\openal-info.dir\
-  TARGET_PDB = openal-soft\openal-info.pdb
+build OpenAL\CMakeFiles\openal-info.dir\utils\openal-info.c.obj: C_COMPILER__openal-info ..\..\..\OpenAL\utils\openal-info.c || cmake_object_order_depends_target_openal-info
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1   /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\common -I..\..\..\OpenAL\include
+  OBJECT_DIR = OpenAL\CMakeFiles\openal-info.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\openal-info.dir\utils
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\openal-info.dir\
+  TARGET_PDB = OpenAL\openal-info.pdb
 
 
 # =============================================================================
@@ -799,25 +852,25 @@ build openal-soft\CMakeFiles\openal-info.dir\utils\openal-info.c.obj: C_COMPILER
 
 
 #############################################
-# Link the executable openal-soft\openal-info.exe
+# Link the executable OpenAL\openal-info.exe
 
-build openal-soft\openal-info.exe: C_EXECUTABLE_LINKER__openal-info openal-soft\CMakeFiles\openal-info.dir\utils\openal-info.c.obj | openal-soft\OpenAL32.lib || openal-soft\OpenAL32.dll
+build OpenAL\openal-info.exe: C_EXECUTABLE_LINKER__openal-info OpenAL\CMakeFiles\openal-info.dir\utils\openal-info.c.obj | OpenAL\OpenAL32.lib || OpenAL\OpenAL32.dll
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
-  LINK_LIBRARIES = openal-soft\OpenAL32.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
-  OBJECT_DIR = openal-soft\CMakeFiles\openal-info.dir
+  LINK_LIBRARIES = OpenAL\OpenAL32.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  OBJECT_DIR = OpenAL\CMakeFiles\openal-info.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\openal-info.dir\
-  TARGET_FILE = openal-soft\openal-info.exe
-  TARGET_IMPLIB = openal-soft\openal-info.lib
-  TARGET_PDB = openal-soft\openal-info.pdb
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\openal-info.dir\
+  TARGET_FILE = OpenAL\openal-info.exe
+  TARGET_IMPLIB = OpenAL\openal-info.lib
+  TARGET_PDB = OpenAL\openal-info.pdb
 
 
 #############################################
 # Utility command for list_install_components
 
-build openal-soft\list_install_components: phony
+build OpenAL\list_install_components: phony
 
 # =============================================================================
 # Object build statements for STATIC_LIBRARY target ex-common
@@ -828,14 +881,14 @@ build openal-soft\list_install_components: phony
 
 build cmake_object_order_depends_target_ex-common: phony || cmake_object_order_depends_target_OpenAL
 
-build openal-soft\CMakeFiles\ex-common.dir\examples\common\alhelpers.c.obj: C_COMPILER__ex-common ..\..\..\openal-soft\examples\common\alhelpers.c || cmake_object_order_depends_target_ex-common
-  DEFINES = -DNOMINMAX -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\common -I..\..\..\openal-soft\include
-  OBJECT_DIR = openal-soft\CMakeFiles\ex-common.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\ex-common.dir\examples\common
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\ex-common.dir\ex-common.pdb
-  TARGET_PDB = openal-soft\ex-common.pdb
+build OpenAL\CMakeFiles\ex-common.dir\examples\common\alhelpers.c.obj: C_COMPILER__ex-common ..\..\..\OpenAL\examples\common\alhelpers.c || cmake_object_order_depends_target_ex-common
+  DEFINES = -DNOMINMAX -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1   /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\common -I..\..\..\OpenAL\include
+  OBJECT_DIR = OpenAL\CMakeFiles\ex-common.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\ex-common.dir\examples\common
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\ex-common.dir\ex-common.pdb
+  TARGET_PDB = OpenAL\ex-common.pdb
 
 
 # =============================================================================
@@ -843,17 +896,17 @@ build openal-soft\CMakeFiles\ex-common.dir\examples\common\alhelpers.c.obj: C_CO
 
 
 #############################################
-# Link the static library openal-soft\ex-common.lib
+# Link the static library OpenAL\ex-common.lib
 
-build openal-soft\ex-common.lib: C_STATIC_LIBRARY_LINKER__ex-common openal-soft\CMakeFiles\ex-common.dir\examples\common\alhelpers.c.obj || openal-soft\OpenAL32.dll
+build OpenAL\ex-common.lib: C_STATIC_LIBRARY_LINKER__ex-common OpenAL\CMakeFiles\ex-common.dir\examples\common\alhelpers.c.obj || OpenAL\OpenAL32.dll
   LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64
-  OBJECT_DIR = openal-soft\CMakeFiles\ex-common.dir
+  OBJECT_DIR = OpenAL\CMakeFiles\ex-common.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\ex-common.dir\ex-common.pdb
-  TARGET_FILE = openal-soft\ex-common.lib
-  TARGET_PDB = openal-soft\ex-common.pdb
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\ex-common.dir\ex-common.pdb
+  TARGET_FILE = OpenAL\ex-common.lib
+  TARGET_PDB = OpenAL\ex-common.pdb
 
 # =============================================================================
 # Object build statements for EXECUTABLE target altonegen
@@ -864,14 +917,14 @@ build openal-soft\ex-common.lib: C_STATIC_LIBRARY_LINKER__ex-common openal-soft\
 
 build cmake_object_order_depends_target_altonegen: phony || cmake_object_order_depends_target_OpenAL cmake_object_order_depends_target_ex-common
 
-build openal-soft\CMakeFiles\altonegen.dir\examples\altonegen.c.obj: C_COMPILER__altonegen ..\..\..\openal-soft\examples\altonegen.c || cmake_object_order_depends_target_altonegen
-  DEFINES = -DNOMINMAX -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\common -I..\..\..\openal-soft\include
-  OBJECT_DIR = openal-soft\CMakeFiles\altonegen.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\altonegen.dir\examples
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\altonegen.dir\
-  TARGET_PDB = openal-soft\altonegen.pdb
+build OpenAL\CMakeFiles\altonegen.dir\examples\altonegen.c.obj: C_COMPILER__altonegen ..\..\..\OpenAL\examples\altonegen.c || cmake_object_order_depends_target_altonegen
+  DEFINES = -DNOMINMAX -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1   /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\common -I..\..\..\OpenAL\include
+  OBJECT_DIR = OpenAL\CMakeFiles\altonegen.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\altonegen.dir\examples
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\altonegen.dir\
+  TARGET_PDB = OpenAL\altonegen.pdb
 
 
 # =============================================================================
@@ -879,31 +932,19 @@ build openal-soft\CMakeFiles\altonegen.dir\examples\altonegen.c.obj: C_COMPILER_
 
 
 #############################################
-# Link the executable openal-soft\altonegen.exe
+# Link the executable OpenAL\altonegen.exe
 
-build openal-soft\altonegen.exe: C_EXECUTABLE_LINKER__altonegen openal-soft\CMakeFiles\altonegen.dir\examples\altonegen.c.obj | openal-soft\ex-common.lib openal-soft\OpenAL32.lib || openal-soft\OpenAL32.dll openal-soft\ex-common.lib
+build OpenAL\altonegen.exe: C_EXECUTABLE_LINKER__altonegen OpenAL\CMakeFiles\altonegen.dir\examples\altonegen.c.obj | OpenAL\ex-common.lib OpenAL\OpenAL32.lib || OpenAL\OpenAL32.dll OpenAL\ex-common.lib
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
-  LINK_LIBRARIES = openal-soft\ex-common.lib openal-soft\OpenAL32.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
-  OBJECT_DIR = openal-soft\CMakeFiles\altonegen.dir
+  LINK_LIBRARIES = OpenAL\ex-common.lib OpenAL\OpenAL32.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  OBJECT_DIR = OpenAL\CMakeFiles\altonegen.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\altonegen.dir\
-  TARGET_FILE = openal-soft\altonegen.exe
-  TARGET_IMPLIB = openal-soft\altonegen.lib
-  TARGET_PDB = openal-soft\altonegen.pdb
-
-
-#############################################
-# Utility command for rebuild_cache
-
-build openal-soft\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\out\build\x64-Debug\openal-soft && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SE:\Repos\WindStream -BE:\Repos\WindStream\out\build\x64-Debug"
-  DESC = Running CMake to regenerate build system...
-  pool = console
-  restat = 1
-
-build openal-soft\rebuild_cache: phony openal-soft\CMakeFiles\rebuild_cache.util
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\altonegen.dir\
+  TARGET_FILE = OpenAL\altonegen.exe
+  TARGET_IMPLIB = OpenAL\altonegen.lib
+  TARGET_PDB = OpenAL\altonegen.pdb
 
 # =============================================================================
 # Object build statements for EXECUTABLE target alrecord
@@ -914,14 +955,14 @@ build openal-soft\rebuild_cache: phony openal-soft\CMakeFiles\rebuild_cache.util
 
 build cmake_object_order_depends_target_alrecord: phony || cmake_object_order_depends_target_OpenAL cmake_object_order_depends_target_ex-common
 
-build openal-soft\CMakeFiles\alrecord.dir\examples\alrecord.c.obj: C_COMPILER__alrecord ..\..\..\openal-soft\examples\alrecord.c || cmake_object_order_depends_target_alrecord
-  DEFINES = -DNOMINMAX -D_CRT_SECURE_NO_WARNINGS -D_LARGEFILE_SOURCE -D_LARGE_FILES -D_WIN32 -D_WIN32_WINNT=0x0502 -Dstrcasecmp=_stricmp -Dstrncasecmp=_strnicmp
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1   /wd4065 /wd4200
-  INCLUDES = -I..\..\..\openal-soft\common -I..\..\..\openal-soft\include
-  OBJECT_DIR = openal-soft\CMakeFiles\alrecord.dir
-  OBJECT_FILE_DIR = openal-soft\CMakeFiles\alrecord.dir\examples
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\alrecord.dir\
-  TARGET_PDB = openal-soft\alrecord.pdb
+build OpenAL\CMakeFiles\alrecord.dir\examples\alrecord.c.obj: C_COMPILER__alrecord ..\..\..\OpenAL\examples\alrecord.c || cmake_object_order_depends_target_alrecord
+  DEFINES = -DNOMINMAX -D_CRT_SECURE_NO_WARNINGS -D_WIN32 -D_WIN32_WINNT=0x0502
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1   /W4 /w14640 /wd4065 /wd4268 /wd4324
+  INCLUDES = -I..\..\..\OpenAL\common -I..\..\..\OpenAL\include
+  OBJECT_DIR = OpenAL\CMakeFiles\alrecord.dir
+  OBJECT_FILE_DIR = OpenAL\CMakeFiles\alrecord.dir\examples
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\alrecord.dir\
+  TARGET_PDB = OpenAL\alrecord.pdb
 
 
 # =============================================================================
@@ -929,184 +970,214 @@ build openal-soft\CMakeFiles\alrecord.dir\examples\alrecord.c.obj: C_COMPILER__a
 
 
 #############################################
-# Link the executable openal-soft\alrecord.exe
+# Link the executable OpenAL\alrecord.exe
 
-build openal-soft\alrecord.exe: C_EXECUTABLE_LINKER__alrecord openal-soft\CMakeFiles\alrecord.dir\examples\alrecord.c.obj | openal-soft\ex-common.lib openal-soft\OpenAL32.lib || openal-soft\OpenAL32.dll openal-soft\ex-common.lib
+build OpenAL\alrecord.exe: C_EXECUTABLE_LINKER__alrecord OpenAL\CMakeFiles\alrecord.dir\examples\alrecord.c.obj | OpenAL\ex-common.lib OpenAL\OpenAL32.lib || OpenAL\OpenAL32.dll OpenAL\ex-common.lib
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
-  LINK_LIBRARIES = openal-soft\ex-common.lib openal-soft\OpenAL32.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
-  OBJECT_DIR = openal-soft\CMakeFiles\alrecord.dir
+  LINK_LIBRARIES = OpenAL\ex-common.lib OpenAL\OpenAL32.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  OBJECT_DIR = OpenAL\CMakeFiles\alrecord.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_COMPILE_PDB = openal-soft\CMakeFiles\alrecord.dir\
-  TARGET_FILE = openal-soft\alrecord.exe
-  TARGET_IMPLIB = openal-soft\alrecord.lib
-  TARGET_PDB = openal-soft\alrecord.pdb
-
-
-#############################################
-# Utility command for install
-
-build openal-soft\CMakeFiles\install.util: CUSTOM_COMMAND openal-soft\all
-  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\out\build\x64-Debug\openal-soft && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
-  DESC = Install the project...
-  pool = console
-  restat = 1
-
-build openal-soft\install: phony openal-soft\CMakeFiles\install.util
-
-
-#############################################
-# Utility command for install/local
-
-build openal-soft\CMakeFiles\install\local.util: CUSTOM_COMMAND openal-soft\all
-  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\out\build\x64-Debug\openal-soft && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
-  DESC = Installing only the local directory...
-  pool = console
-  restat = 1
-
-build openal-soft\install\local: phony openal-soft\CMakeFiles\install\local.util
-
-
-#############################################
-# Custom command for openal-soft\CMakeFiles\build_version
-
-build openal-soft\CMakeFiles\build_version: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\openal-soft && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -D "GIT_EXECUTABLE=C:/Program Files/Git/cmd/git.exe" -D LIB_VERSION=1.19.1 -D LIB_VERSION_NUM=1,19,1,0 -D SRC=E:/Repos/WindStream/openal-soft/version.h.in -D DST=E:/Repos/WindStream/out/build/x64-Debug/openal-soft/version.h -P E:/Repos/WindStream/openal-soft/version.cmake"
-
-
-#############################################
-# Custom command for openal-soft\default-44100.mhr.h
-
-build openal-soft\default-44100.mhr.h: CUSTOM_COMMAND ..\..\..\openal-soft\hrtf\default-44100.mhr || openal-soft\build_version openal-soft\native-tools
-  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\out\build\x64-Debug\openal-soft && E:\Repos\WindStream\out\build\x64-Debug\openal-soft\native-tools\bin2h E:/Repos/WindStream/openal-soft/hrtf/default-44100.mhr E:/Repos/WindStream/out/build/x64-Debug/openal-soft/default-44100.mhr.h hrtf_default_44100"
-  DESC = Generating default-44100.mhr.h
-  restat = 1
-
-
-#############################################
-# Custom command for openal-soft\default-48000.mhr.h
-
-build openal-soft\default-48000.mhr.h: CUSTOM_COMMAND ..\..\..\openal-soft\hrtf\default-48000.mhr || openal-soft\build_version openal-soft\native-tools
-  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\out\build\x64-Debug\openal-soft && E:\Repos\WindStream\out\build\x64-Debug\openal-soft\native-tools\bin2h E:/Repos/WindStream/openal-soft/hrtf/default-48000.mhr E:/Repos/WindStream/out/build/x64-Debug/openal-soft/default-48000.mhr.h hrtf_default_48000"
-  DESC = Generating default-48000.mhr.h
-  restat = 1
-
-
-#############################################
-# Custom command for openal-soft\bsinc_inc.h
-
-build openal-soft\bsinc_inc.h: CUSTOM_COMMAND ..\..\..\openal-soft\native-tools\bsincgen.c || openal-soft\build_version openal-soft\native-tools
-  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\out\build\x64-Debug\openal-soft && E:\Repos\WindStream\out\build\x64-Debug\openal-soft\native-tools\bsincgen E:/Repos/WindStream/out/build/x64-Debug/openal-soft/bsinc_inc.h"
-  DESC = Generating bsinc_inc.h
-  restat = 1
-
-
-#############################################
-# Phony custom command for openal-soft\CMakeFiles\native-tools
-
-build openal-soft\CMakeFiles\native-tools: phony openal-soft\native-tools\bin2h openal-soft\native-tools\bsincgen
-
-
-#############################################
-# Custom command for openal-soft\native-tools\bin2h
-
-build openal-soft\native-tools\bin2h openal-soft\native-tools\bsincgen: CUSTOM_COMMAND ..\..\..\openal-soft\native-tools\CMakeLists.txt ..\..\..\openal-soft\native-tools\bin2h.c ..\..\..\openal-soft\native-tools\bsincgen.c
-  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\out\build\x64-Debug\openal-soft\native-tools && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -G Ninja E:/Repos/WindStream/openal-soft/native-tools && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E remove E:/Repos/WindStream/out/build/x64-Debug/openal-soft/native-tools/bin2h E:/Repos/WindStream/out/build/x64-Debug/openal-soft/native-tools/bsincgen && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --build . --config Release"
-  DESC = Generating native-tools/bin2h, native-tools/bsincgen
-  restat = 1
-
-# =============================================================================
-# Write statements declared in CMakeLists.txt:
-# E:/Repos/WindStream/openal-soft/CMakeLists.txt
-# =============================================================================
-
-
-#############################################
-# Utility command for install/local
-
-build openal-soft\utils\alsoft-config\CMakeFiles\install\local.util: CUSTOM_COMMAND openal-soft\utils\alsoft-config\all
-  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\out\build\x64-Debug\openal-soft\utils\alsoft-config && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
-  DESC = Installing only the local directory...
-  pool = console
-  restat = 1
-
-build openal-soft\utils\alsoft-config\install\local: phony openal-soft\utils\alsoft-config\CMakeFiles\install\local.util
-
-
-#############################################
-# Utility command for install
-
-build openal-soft\utils\alsoft-config\CMakeFiles\install.util: CUSTOM_COMMAND openal-soft\utils\alsoft-config\all
-  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\out\build\x64-Debug\openal-soft\utils\alsoft-config && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
-  DESC = Install the project...
-  pool = console
-  restat = 1
-
-build openal-soft\utils\alsoft-config\install: phony openal-soft\utils\alsoft-config\CMakeFiles\install.util
-
-
-#############################################
-# Utility command for edit_cache
-
-build openal-soft\utils\alsoft-config\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\out\build\x64-Debug\openal-soft\utils\alsoft-config && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
-  DESC = No interactive CMake dialog available...
-  restat = 1
-
-build openal-soft\utils\alsoft-config\edit_cache: phony openal-soft\utils\alsoft-config\CMakeFiles\edit_cache.util
+  TARGET_COMPILE_PDB = OpenAL\CMakeFiles\alrecord.dir\
+  TARGET_FILE = OpenAL\alrecord.exe
+  TARGET_IMPLIB = OpenAL\alrecord.lib
+  TARGET_PDB = OpenAL\alrecord.pdb
 
 
 #############################################
 # Utility command for rebuild_cache
 
-build openal-soft\utils\alsoft-config\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\out\build\x64-Debug\openal-soft\utils\alsoft-config && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SE:\Repos\WindStream -BE:\Repos\WindStream\out\build\x64-Debug"
+build OpenAL\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\out\build\x64-Debug\OpenAL && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SE:\Repos\WindStream -BE:\Repos\WindStream\out\build\x64-Debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
 
-build openal-soft\utils\alsoft-config\rebuild_cache: phony openal-soft\utils\alsoft-config\CMakeFiles\rebuild_cache.util
+build OpenAL\rebuild_cache: phony OpenAL\CMakeFiles\rebuild_cache.util
+
+
+#############################################
+# Utility command for install
+
+build OpenAL\CMakeFiles\install.util: CUSTOM_COMMAND OpenAL\all
+  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\out\build\x64-Debug\OpenAL && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build OpenAL\install: phony OpenAL\CMakeFiles\install.util
+
+
+#############################################
+# Utility command for install/local
+
+build OpenAL\CMakeFiles\install\local.util: CUSTOM_COMMAND OpenAL\all
+  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\out\build\x64-Debug\OpenAL && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build OpenAL\install\local: phony OpenAL\CMakeFiles\install\local.util
+
+
+#############################################
+# Custom command for OpenAL\CMakeFiles\build_version
+
+build OpenAL\CMakeFiles\build_version: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\OpenAL && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -D "GIT_EXECUTABLE=C:/Program Files/Git/cmd/git.exe" -D LIB_VERSION=1.19.1 -D LIB_VERSION_NUM=1,19,1,0 -D SRC=E:/Repos/WindStream/OpenAL/version.h.in -D DST=E:/Repos/WindStream/out/build/x64-Debug/OpenAL/version.h -P E:/Repos/WindStream/OpenAL/version.cmake"
+
+
+#############################################
+# Custom command for OpenAL\default-44100.mhr.h
+
+build OpenAL\default-44100.mhr.h: CUSTOM_COMMAND ..\..\..\OpenAL\hrtf\default-44100.mhr || OpenAL\build_version OpenAL\common.lib OpenAL\native-tools
+  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\out\build\x64-Debug\OpenAL && E:\Repos\WindStream\out\build\x64-Debug\OpenAL\native-tools\bin2h E:/Repos/WindStream/OpenAL/hrtf/default-44100.mhr E:/Repos/WindStream/out/build/x64-Debug/OpenAL/default-44100.mhr.h hrtf_default_44100"
+  DESC = Generating default-44100.mhr.h
+  restat = 1
+
+
+#############################################
+# Custom command for OpenAL\default-48000.mhr.h
+
+build OpenAL\default-48000.mhr.h: CUSTOM_COMMAND ..\..\..\OpenAL\hrtf\default-48000.mhr || OpenAL\build_version OpenAL\common.lib OpenAL\native-tools
+  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\out\build\x64-Debug\OpenAL && E:\Repos\WindStream\out\build\x64-Debug\OpenAL\native-tools\bin2h E:/Repos/WindStream/OpenAL/hrtf/default-48000.mhr E:/Repos/WindStream/out/build/x64-Debug/OpenAL/default-48000.mhr.h hrtf_default_48000"
+  DESC = Generating default-48000.mhr.h
+  restat = 1
+
+
+#############################################
+# Custom command for OpenAL\bsinc_inc.h
+
+build OpenAL\bsinc_inc.h: CUSTOM_COMMAND ..\..\..\OpenAL\native-tools\bsincgen.c || OpenAL\build_version OpenAL\common.lib OpenAL\native-tools
+  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\out\build\x64-Debug\OpenAL && E:\Repos\WindStream\out\build\x64-Debug\OpenAL\native-tools\bsincgen E:/Repos/WindStream/out/build/x64-Debug/OpenAL/bsinc_inc.h"
+  DESC = Generating bsinc_inc.h
+  restat = 1
+
+
+#############################################
+# Phony custom command for OpenAL\CMakeFiles\native-tools
+
+build OpenAL\CMakeFiles\native-tools: phony OpenAL\native-tools\bin2h OpenAL\native-tools\bsincgen
+
+
+#############################################
+# Custom command for OpenAL\native-tools\bin2h
+
+build OpenAL\native-tools\bin2h OpenAL\native-tools\bsincgen: CUSTOM_COMMAND ..\..\..\OpenAL\native-tools\CMakeLists.txt ..\..\..\OpenAL\native-tools\bin2h.c ..\..\..\OpenAL\native-tools\bsincgen.c
+  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\out\build\x64-Debug\OpenAL\native-tools && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -G Ninja E:/Repos/WindStream/OpenAL/native-tools && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E remove E:/Repos/WindStream/out/build/x64-Debug/OpenAL/native-tools/bin2h E:/Repos/WindStream/out/build/x64-Debug/OpenAL/native-tools/bsincgen && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --build . --config Release"
+  DESC = Generating native-tools/bin2h, native-tools/bsincgen
+  restat = 1
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# E:/Repos/WindStream/OpenAL/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for install/local
+
+build OpenAL\utils\alsoft-config\CMakeFiles\install\local.util: CUSTOM_COMMAND OpenAL\utils\alsoft-config\all
+  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\out\build\x64-Debug\OpenAL\utils\alsoft-config && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build OpenAL\utils\alsoft-config\install\local: phony OpenAL\utils\alsoft-config\CMakeFiles\install\local.util
+
+
+#############################################
+# Utility command for install
+
+build OpenAL\utils\alsoft-config\CMakeFiles\install.util: CUSTOM_COMMAND OpenAL\utils\alsoft-config\all
+  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\out\build\x64-Debug\OpenAL\utils\alsoft-config && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build OpenAL\utils\alsoft-config\install: phony OpenAL\utils\alsoft-config\CMakeFiles\install.util
+
+
+#############################################
+# Utility command for edit_cache
+
+build OpenAL\utils\alsoft-config\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\out\build\x64-Debug\OpenAL\utils\alsoft-config && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build OpenAL\utils\alsoft-config\edit_cache: phony OpenAL\utils\alsoft-config\CMakeFiles\edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build OpenAL\utils\alsoft-config\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D E:\Repos\WindStream\out\build\x64-Debug\OpenAL\utils\alsoft-config && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SE:\Repos\WindStream -BE:\Repos\WindStream\out\build\x64-Debug"
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build OpenAL\utils\alsoft-config\rebuild_cache: phony OpenAL\utils\alsoft-config\CMakeFiles\rebuild_cache.util
 
 
 #############################################
 # Utility command for list_install_components
 
-build openal-soft\utils\alsoft-config\list_install_components: phony
+build OpenAL\utils\alsoft-config\list_install_components: phony
 
 # =============================================================================
 # Target aliases.
 
-build OpenAL: phony openal-soft\OpenAL32.dll
+build OpenAL: phony OpenAL\OpenAL32.dll
 
-build OpenAL32.dll: phony openal-soft\OpenAL32.dll
+build OpenAL32.dll: phony OpenAL\OpenAL32.dll
 
 build WindStream: phony WindStream\WindStream.exe
 
 build WindStream.exe: phony WindStream\WindStream.exe
 
-build alrecord: phony openal-soft\alrecord.exe
+build alrecord: phony OpenAL\alrecord.exe
 
-build alrecord.exe: phony openal-soft\alrecord.exe
+build alrecord.exe: phony OpenAL\alrecord.exe
 
-build altonegen: phony openal-soft\altonegen.exe
+build altonegen: phony OpenAL\altonegen.exe
 
-build altonegen.exe: phony openal-soft\altonegen.exe
+build altonegen.exe: phony OpenAL\altonegen.exe
 
-build build_version: phony openal-soft\build_version
+build build_version: phony OpenAL\build_version
 
-build ex-common: phony openal-soft\ex-common.lib
+build common: phony OpenAL\common.lib
 
-build ex-common.lib: phony openal-soft\ex-common.lib
+build common.lib: phony OpenAL\common.lib
 
-build native-tools: phony openal-soft\native-tools
+build ex-common: phony OpenAL\ex-common.lib
 
-build openal-info: phony openal-soft\openal-info.exe
+build ex-common.lib: phony OpenAL\ex-common.lib
 
-build openal-info.exe: phony openal-soft\openal-info.exe
+build native-tools: phony OpenAL\native-tools
+
+build openal-info: phony OpenAL\openal-info.exe
+
+build openal-info.exe: phony OpenAL\openal-info.exe
 
 # =============================================================================
 # Folder targets.
+
+# =============================================================================
+
+#############################################
+# Folder: E:/Repos/WindStream/out/build/x64-Debug/OpenAL
+
+build OpenAL\all: phony OpenAL openal-info altonegen alrecord OpenAL\utils\alsoft-config\all
+
+# =============================================================================
+
+#############################################
+# Folder: E:/Repos/WindStream/out/build/x64-Debug/OpenAL/utils/alsoft-config
+
+build OpenAL\utils\alsoft-config\all: phony
 
 # =============================================================================
 
@@ -1116,27 +1187,13 @@ build openal-info.exe: phony openal-soft\openal-info.exe
 build WindStream\all: phony WindStream
 
 # =============================================================================
-
-#############################################
-# Folder: E:/Repos/WindStream/out/build/x64-Debug/openal-soft
-
-build openal-soft\all: phony OpenAL openal-info ex-common altonegen alrecord openal-soft\utils\alsoft-config\all
-
-# =============================================================================
-
-#############################################
-# Folder: E:/Repos/WindStream/out/build/x64-Debug/openal-soft/utils/alsoft-config
-
-build openal-soft\utils\alsoft-config\all: phony
-
-# =============================================================================
 # Built-in targets
 
 
 #############################################
 # The main all target.
 
-build all: phony WindStream\WindStream.exe openal-soft\OpenAL32.dll openal-soft\openal-info.exe openal-soft\ex-common.lib openal-soft\altonegen.exe openal-soft\alrecord.exe
+build all: phony WindStream\WindStream.exe OpenAL\OpenAL32.dll OpenAL\openal-info.exe OpenAL\altonegen.exe OpenAL\alrecord.exe
 
 
 #############################################
@@ -1147,14 +1204,14 @@ default all
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | ..\..\..\CMakeLists.txt ..\..\..\WindStream\CMakeLists.txt ..\..\..\openal-soft\CMakeLists.txt ..\..\..\openal-soft\cmake\CheckFileOffsetBits.cmake ..\..\..\openal-soft\cmake\FindALSA.cmake ..\..\..\openal-soft\cmake\FindAudioIO.cmake ..\..\..\openal-soft\cmake\FindDSound.cmake ..\..\..\openal-soft\cmake\FindJACK.cmake ..\..\..\openal-soft\cmake\FindMySOFA.cmake ..\..\..\openal-soft\cmake\FindOSS.cmake ..\..\..\openal-soft\cmake\FindOpenSL.cmake ..\..\..\openal-soft\cmake\FindPortAudio.cmake ..\..\..\openal-soft\cmake\FindPulseAudio.cmake ..\..\..\openal-soft\cmake\FindQSA.cmake ..\..\..\openal-soft\cmake\FindSDL2.cmake ..\..\..\openal-soft\cmake\FindSoundIO.cmake ..\..\..\openal-soft\cmake\FindWindowsSDK.cmake ..\..\..\openal-soft\config.h.in ..\..\..\openal-soft\openal.pc.in ..\..\..\openal-soft\utils\alsoft-config\CMakeLists.txt C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeCXXInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeGenericSystem.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakePushCheckState.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeRCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckCCompilerFlag.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckCSourceCompiles.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckCXXCompilerFlag.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckCXXSourceCompiles.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckCXXSymbolExists.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckFunctionExists.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckIncludeFile.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckIncludeFileCXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckIncludeFiles.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckLibraryExists.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckStructHasMember.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckSymbolExists.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckTypeSize.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\FindGit.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\FindPackageHandleStandardArgs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\FindPackageMessage.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\FindQt4.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\FindThreads.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\FindZLIB.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\GNUInstallDirs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\MacroAddFileDependencies.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Platform\Windows.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Platform\WindowsPaths.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\SelectLibraryConfigurations.cmake CMakeCache.txt CMakeFiles\3.15.19080502-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.15.19080502-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.15.19080502-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.15.19080502-MSVC_2\CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | ..\..\..\CMakeLists.txt ..\..\..\OpenAL\CMakeLists.txt ..\..\..\OpenAL\cmake\FindALSA.cmake ..\..\..\OpenAL\cmake\FindAudioIO.cmake ..\..\..\OpenAL\cmake\FindDSound.cmake ..\..\..\OpenAL\cmake\FindJACK.cmake ..\..\..\OpenAL\cmake\FindMySOFA.cmake ..\..\..\OpenAL\cmake\FindOSS.cmake ..\..\..\OpenAL\cmake\FindOpenSL.cmake ..\..\..\OpenAL\cmake\FindPortAudio.cmake ..\..\..\OpenAL\cmake\FindPulseAudio.cmake ..\..\..\OpenAL\cmake\FindQSA.cmake ..\..\..\OpenAL\cmake\FindSDL2.cmake ..\..\..\OpenAL\cmake\FindSoundIO.cmake ..\..\..\OpenAL\cmake\FindWindowsSDK.cmake ..\..\..\OpenAL\config.h.in ..\..\..\OpenAL\openal.pc.in ..\..\..\OpenAL\utils\alsoft-config\CMakeLists.txt ..\..\..\WindStream\CMakeLists.txt C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeCXXInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeGenericSystem.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakePushCheckState.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeRCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckCCompilerFlag.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckCSourceCompiles.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckCXXCompilerFlag.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckCXXSourceCompiles.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckCXXSymbolExists.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckFunctionExists.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckIncludeFile.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckIncludeFileCXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckIncludeFiles.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckLibraryExists.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckStructHasMember.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckSymbolExists.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckTypeSize.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\FindGit.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\FindPackageHandleStandardArgs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\FindPackageMessage.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\FindQt4.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\FindThreads.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\FindZLIB.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\GNUInstallDirs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\MacroAddFileDependencies.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Platform\Windows.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Platform\WindowsPaths.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\SelectLibraryConfigurations.cmake CMakeCache.txt CMakeFiles\3.15.19080502-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.15.19080502-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.15.19080502-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.15.19080502-MSVC_2\CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ..\..\..\CMakeLists.txt ..\..\..\WindStream\CMakeLists.txt ..\..\..\openal-soft\CMakeLists.txt ..\..\..\openal-soft\cmake\CheckFileOffsetBits.cmake ..\..\..\openal-soft\cmake\FindALSA.cmake ..\..\..\openal-soft\cmake\FindAudioIO.cmake ..\..\..\openal-soft\cmake\FindDSound.cmake ..\..\..\openal-soft\cmake\FindJACK.cmake ..\..\..\openal-soft\cmake\FindMySOFA.cmake ..\..\..\openal-soft\cmake\FindOSS.cmake ..\..\..\openal-soft\cmake\FindOpenSL.cmake ..\..\..\openal-soft\cmake\FindPortAudio.cmake ..\..\..\openal-soft\cmake\FindPulseAudio.cmake ..\..\..\openal-soft\cmake\FindQSA.cmake ..\..\..\openal-soft\cmake\FindSDL2.cmake ..\..\..\openal-soft\cmake\FindSoundIO.cmake ..\..\..\openal-soft\cmake\FindWindowsSDK.cmake ..\..\..\openal-soft\config.h.in ..\..\..\openal-soft\openal.pc.in ..\..\..\openal-soft\utils\alsoft-config\CMakeLists.txt C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeCXXInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeGenericSystem.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakePushCheckState.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeRCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckCCompilerFlag.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckCSourceCompiles.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckCXXCompilerFlag.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckCXXSourceCompiles.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckCXXSymbolExists.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckFunctionExists.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckIncludeFile.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckIncludeFileCXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckIncludeFiles.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckLibraryExists.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckStructHasMember.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckSymbolExists.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckTypeSize.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\FindGit.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\FindPackageHandleStandardArgs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\FindPackageMessage.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\FindQt4.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\FindThreads.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\FindZLIB.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\GNUInstallDirs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\MacroAddFileDependencies.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Platform\Windows.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Platform\WindowsPaths.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\SelectLibraryConfigurations.cmake CMakeCache.txt CMakeFiles\3.15.19080502-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.15.19080502-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.15.19080502-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.15.19080502-MSVC_2\CMakeSystem.cmake: phony
+build ..\..\..\CMakeLists.txt ..\..\..\OpenAL\CMakeLists.txt ..\..\..\OpenAL\cmake\FindALSA.cmake ..\..\..\OpenAL\cmake\FindAudioIO.cmake ..\..\..\OpenAL\cmake\FindDSound.cmake ..\..\..\OpenAL\cmake\FindJACK.cmake ..\..\..\OpenAL\cmake\FindMySOFA.cmake ..\..\..\OpenAL\cmake\FindOSS.cmake ..\..\..\OpenAL\cmake\FindOpenSL.cmake ..\..\..\OpenAL\cmake\FindPortAudio.cmake ..\..\..\OpenAL\cmake\FindPulseAudio.cmake ..\..\..\OpenAL\cmake\FindQSA.cmake ..\..\..\OpenAL\cmake\FindSDL2.cmake ..\..\..\OpenAL\cmake\FindSoundIO.cmake ..\..\..\OpenAL\cmake\FindWindowsSDK.cmake ..\..\..\OpenAL\config.h.in ..\..\..\OpenAL\openal.pc.in ..\..\..\OpenAL\utils\alsoft-config\CMakeLists.txt ..\..\..\WindStream\CMakeLists.txt C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeCXXInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeCommonLanguageInclude.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeGenericSystem.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeInitializeConfigs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeLanguageInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakePushCheckState.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeRCInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeSystemSpecificInformation.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CMakeSystemSpecificInitialize.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckCCompilerFlag.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckCSourceCompiles.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckCXXCompilerFlag.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckCXXSourceCompiles.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckCXXSymbolExists.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckFunctionExists.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckIncludeFile.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckIncludeFileCXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckIncludeFiles.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckLibraryExists.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckStructHasMember.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckSymbolExists.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\CheckTypeSize.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Compiler\CMakeCommonCompilerMacros.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Compiler\MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Compiler\MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\FindGit.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\FindPackageHandleStandardArgs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\FindPackageMessage.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\FindQt4.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\FindThreads.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\FindZLIB.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\GNUInstallDirs.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\MacroAddFileDependencies.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC-C.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC-CXX.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Platform\Windows.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\Platform\WindowsPaths.cmake C$:\Program$ Files$ (x86)\Microsoft$ Visual$ Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.15\Modules\SelectLibraryConfigurations.cmake CMakeCache.txt CMakeFiles\3.15.19080502-MSVC_2\CMakeCCompiler.cmake CMakeFiles\3.15.19080502-MSVC_2\CMakeCXXCompiler.cmake CMakeFiles\3.15.19080502-MSVC_2\CMakeRCCompiler.cmake CMakeFiles\3.15.19080502-MSVC_2\CMakeSystem.cmake: phony
 
 
 #############################################

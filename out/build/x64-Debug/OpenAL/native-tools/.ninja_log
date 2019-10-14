@@ -1,0 +1,5 @@
+# ninja log v5
+0	110	592645468	CMakeFiles/bin2h.dir/bin2h.c.obj	7747a80a03e7af44
+5	337	592645468	CMakeFiles/bsincgen.dir/bsincgen.c.obj	125e0fe4ee65d74
+110	519	592645468	bin2h.exe	40f0baed55774bb2
+337	745	592645469	bsincgen.exe	8c28517f670b6217

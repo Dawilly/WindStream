@@ -4,6 +4,10 @@
 #pragma once
 
 #include <stdio.h>
+#include <stdlib.h>
 
-// TODO: Reference additional headers your program requires here.
+#if defined(_WIN32) 
+#include <windows.h>
+#endif
 
+#include "AudioHandler/audiohandler.h"

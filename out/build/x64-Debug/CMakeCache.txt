@@ -422,13 +422,13 @@ OSS_INCLUDE_DIR:PATH=OSS_INCLUDE_DIR-NOTFOUND
 OSS_LIBRARY:FILEPATH=OSS_LIBRARY-NOTFOUND
 
 //Value Computed by CMake
-OpenAL_BINARY_DIR:STATIC=E:/Repos/WindStream/out/build/x64-Debug/openal-soft
+OpenAL_BINARY_DIR:STATIC=E:/Repos/WindStream/out/build/x64-Debug/OpenAL
 
 //Dependencies for the target
-OpenAL_LIB_DEPENDS:STATIC=general;C:/Program Files (x86)/Windows Kits/10/Lib/10.0.18362.0/um/x64/WinMM.Lib;
+OpenAL_LIB_DEPENDS:STATIC=general;common;general;C:/Program Files (x86)/Windows Kits/10/Lib/10.0.18362.0/um/x64/WinMM.Lib;
 
 //Value Computed by CMake
-OpenAL_SOURCE_DIR:STATIC=E:/Repos/WindStream/openal-soft
+OpenAL_SOURCE_DIR:STATIC=E:/Repos/WindStream/OpenAL
 
 //The PortAudio include directory
 PORTAUDIO_INCLUDE_DIR:PATH=PORTAUDIO_INCLUDE_DIR-NOTFOUND
@@ -481,10 +481,10 @@ ZLIB_LIBRARY_DEBUG:FILEPATH=ZLIB_LIBRARY_DEBUG-NOTFOUND
 ZLIB_LIBRARY_RELEASE:FILEPATH=ZLIB_LIBRARY_RELEASE-NOTFOUND
 
 //Value Computed by CMake
-alsoft-config_BINARY_DIR:STATIC=E:/Repos/WindStream/out/build/x64-Debug/openal-soft/utils/alsoft-config
+alsoft-config_BINARY_DIR:STATIC=E:/Repos/WindStream/out/build/x64-Debug/OpenAL/utils/alsoft-config
 
 //Value Computed by CMake
-alsoft-config_SOURCE_DIR:STATIC=E:/Repos/WindStream/openal-soft/utils/alsoft-config
+alsoft-config_SOURCE_DIR:STATIC=E:/Repos/WindStream/OpenAL/utils/alsoft-config
 
 //Dependencies for the target
 ex-common_LIB_DEPENDS:STATIC=general;OpenAL;
@@ -708,6 +708,8 @@ HAVE_LIBDL:INTERNAL=
 HAVE_LIBLOG:INTERNAL=
 //Have library m
 HAVE_LIBM:INTERNAL=
+//Have library rt
+HAVE_LIBRT:INTERNAL=
 //Have include malloc.h
 HAVE_MALLOC_H:INTERNAL=1
 //Test HAVE_MFPU_NEON_SWITCH
@@ -722,6 +724,8 @@ HAVE_MSSE2_SWITCH:INTERNAL=
 HAVE_MSSE3_SWITCH:INTERNAL=
 //Test HAVE_MSSE4_1_SWITCH
 HAVE_MSSE4_1_SWITCH:INTERNAL=
+//Test HAVE_PERMISSIVE_SWITCH
+HAVE_PERMISSIVE_SWITCH:INTERNAL=1
 //Have include pmmintrin.h
 HAVE_PMMINTRIN_H:INTERNAL=1
 //Have symbol posix_memalign

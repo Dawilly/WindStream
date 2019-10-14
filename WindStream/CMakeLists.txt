@@ -4,7 +4,14 @@
 cmake_minimum_required (VERSION 3.8)
 
 # Add source to this project's executable.
-add_executable (WindStream "WindStream.c" "WindStream.h")
+include_directories(AudioHandler)
+
+set(AAPI AudioHandler)
+set(SOURCES WindStream.c WindStream.h 
+	${AAPI}/audiohandler.c ${AAPI}/audiohandler.h)
+
+add_executable (WindStream ${SOURCES})
+
+target_link_libraries(WindStream OpenAL)
 
 # TODO: Add tests and install targets if needed.
-target_link_libraries(WindStream OpenAL)
