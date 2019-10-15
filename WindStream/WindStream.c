@@ -3,15 +3,27 @@
 
 #include "WindStream.h"
 
-int main() {
-	void* fp;
-	void* ptr = LoadLibrary("OpenAL32.dll");
+BOOL GetFunctionAddresses(void* lib, void** ptrArray, char** funcNames, int count) {
+	int i;
+	
+	if (lib != NULL) {
+		for (i = 0; i < count; i++) {
+			ptrArray[i] = GETLIBFUNCTION(lib, funcNames[i]);
+			if (ptrArray[i] == NULL) return FALSE;
+		}
+	}
 
-	if (ptr != NULL) fp = GetProcAddress(ptr, "alGenBuffers");
-
-	return 0;
+	return TRUE;
 }
 
-void GetFunctionAddresses() {
-
+#if defined(_WIN32)
+BOOL GetLibrary(char* filePath, void* out) {
+	out = LoadLibrary(filePath);
+	return (out == NULL) ? FALSE : TRUE;
 }
+#else
+BOOL GetLibrary(char* filePath, void* out) {
+	out = dlopen(filePath, RTLD_LAZY);
+	return (out == NULL) ? FALSE : TRUE;
+}
+#endif
