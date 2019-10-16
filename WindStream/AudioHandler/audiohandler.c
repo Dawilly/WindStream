@@ -5,6 +5,6 @@ typedef struct audioHandler {
 	void (*Close)();
 } AUDIOHANDLER;
 
-void OpenDevice(AUDIOHANDLER* ah) {
+void OpenAudioDevice(AUDIOHANDLER* ah) {
 
 }

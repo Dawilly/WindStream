@@ -22,6 +22,6 @@
 #define BOOL int
 
 BOOL GetFunctionAddresses(void*, void**, char**, int);
-BOOL GetLibrary(char*, void*);
+BOOL GetLibrary(char*, void**);
 
 #endif

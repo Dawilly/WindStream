@@ -1,5 +1,6 @@
 #include "apihandler.h"
 #include "openal_apihandler.h"
+#include "../WindStream.h"
 
 typedef struct oalapi {
 	void* device;
@@ -31,12 +32,16 @@ OAL_API* CreateOalApi(int (*dylibopen)(char*, void*), int (*dylibsym)(void*, voi
 	};
 
 	//To-do: Macro DLL/SO/DYLIB name, as it depends on OS.
-	if (!dylibopen("OpenAL32.dll", lib)) {
+	if (!dylibopen("OpenAL32.dll", &lib)) {
 		fprintf(stderr, "Unable to find OpenAL32.dll.");
 		return NULL;
 	}
 
 	funcList = malloc(sizeof(void*) * numberOfFuncs);
+	if (!funcList) {
+		fprintf(stderr, "Unable to allocate memory for void**");
+		return;
+	}
 	
 	//To-Do: Express what function was not found.
 	if (!dylibsym(lib, funcList, names, numberOfFuncs)) {
@@ -45,6 +50,10 @@ OAL_API* CreateOalApi(int (*dylibopen)(char*, void*), int (*dylibsym)(void*, voi
 	}
 
 	newAPI = (OAL_API*)malloc(sizeof(OAL_API));
+	if (!newAPI) {
+		fprintf(stderr, "Unable to allocate memory for OAL_API*\n");
+		return;
+	}
 
 	newAPI->OpenDevice = funcList[0];
 	newAPI->CreateContext = funcList[1];
@@ -69,18 +78,41 @@ void OpenDevice(OAL_API* ptr, char* deviceString) {
 
 	ptr->ctx = ptr->CreateContext(ptr->device, NULL);
 
+	if (ptr->ctx == NULL || ptr->MakeContextCurrent(ptr->ctx) == FALSE) {
+		if (ptr->ctx != NULL) ptr->DestroyContext(ptr->ctx);
+		ptr->CloseDevice(ptr->device);
+		fprintf(stderr, "Unable to set context.\n");
+		return;
+	}
 
+	// Extension goes here.
+	return;
 }
 
 void CloseDevice(OAL_API* ptr) {
-	
+	void* currentCtx = ptr->GetCurrentContext();
+	if (currentCtx == NULL) return;
+
+	void* device = ptr->GetContextsDevice(currentCtx);
+
+	ptr->MakeContextCurrent(NULL);
+	ptr->DestroyContext(currentCtx);
+	ptr->CloseDevice(device);
+	return;
 }
 
 ///////////////////////
 // Private Functions //
 ///////////////////////
 
+void OpenDefaultDevice(OAL_API* ptr) {
+	ptr->device = ptr->OpenDevice(NULL);
 
+	if (!ptr->device) {
+		fprintf(stderr, "Unable to open default device!\n");
+	}
+	return;
+}
 
 void CleanUp(int count, ...) {
 	va_list arg;

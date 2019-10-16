@@ -5,4 +5,6 @@ int main() {
 	printf("Test...\n");
 
 	OAL_API* test = CreateOalApi(GetLibrary, GetFunctionAddresses);
+
+	return 0;
 }

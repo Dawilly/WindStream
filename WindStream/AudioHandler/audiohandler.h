@@ -5,6 +5,6 @@
 
 typedef struct audioHandler AUDIOHANDLER;
 
-void OpenDevice(AUDIOHANDLER*);
+void OpenAudioDevice(AUDIOHANDLER*);
 
 #endif // !__AUDIOAPI__INCLUDED__
