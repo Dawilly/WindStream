@@ -4,8 +4,11 @@
 
 typedef struct oalapi {
 	char** deviceList;
+	int deviceCount;
+
 	void* device;
 	void* ctx;
+	int deviceState;
 
 	void* (*OpenDevice)(char*);
 
@@ -39,7 +42,6 @@ OAL_API* CreateOalApi(int (*dylibopen)(char*, void*), int (*dylibsym)(void*, voi
 		"alcCloseDevice", "alcIsExtensionPresent", "alcGetString"
 	};
 
-	//To-do: Macro DLL/SO/DYLIB name, as it depends on OS.
 	if (!dylibopen(LIBRARYNAME, &lib)) {
 		fprintf(stderr, "Unable to find OpenAL32.dll.");
 		return NULL;
@@ -72,6 +74,7 @@ OAL_API* CreateOalApi(int (*dylibopen)(char*, void*), int (*dylibsym)(void*, voi
 	newAPI->CloseDevice = funcList[6];
 	newAPI->IsExtensionPresent = funcList[7];
 	newAPI->GetString = funcList[8];
+	newAPI->deviceState = 0;
 
 	free(funcList);
 
@@ -80,15 +83,23 @@ OAL_API* CreateOalApi(int (*dylibopen)(char*, void*), int (*dylibsym)(void*, voi
 
 void GetAllDevices(OAL_API* ptr) {
 	if (ptr->IsExtensionPresent(NULL, "ALC_ENUMERATE_ALL_EXT") != FALSE) {
-		int count = countDeviceList(ptr->GetString(NULL, 0x1013));
-		iterateDeviceList(ptr, 0x1013, count);
+		ptr->deviceCount = countDeviceList(ptr->GetString(NULL, 0x1013));
+		iterateDeviceList(ptr, 0x1013, ptr->deviceCount);
 	}
 }
 
 void PrintAllDevices(OAL_API* ptr) {
-	for (int i = 0; i < 4; i++) {
-		printf("\t%s\n", ptr->deviceList[i]);
+	int count = ptr->deviceCount;
+	for (int i = 0; i < count; i++) {
+		printf("\t%d) %s\n", i, ptr->deviceList[i]);
 	}
+}
+
+void OpenDeviceWithSelection(OAL_API* ptr, int indexSelection) {
+	char* value = (indexSelection < 0 || indexSelection >= ptr->deviceCount) 
+		? NULL : ptr->deviceList[indexSelection];
+	OpenDevice(ptr, value);
+	return;
 }
 
 void OpenDevice(OAL_API* ptr, char* deviceString) {
@@ -110,6 +121,7 @@ void OpenDevice(OAL_API* ptr, char* deviceString) {
 		return;
 	}
 
+	ptr->deviceState = 1;
 	// Extension goes here.
 	return;
 }
@@ -123,11 +135,33 @@ void CloseDevice(OAL_API* ptr) {
 	ptr->MakeContextCurrent(NULL);
 	ptr->DestroyContext(currentCtx);
 	ptr->CloseDevice(device);
+	ptr->deviceState = 0;
 	return;
 }
 
 void DestroyOalApi(OAL_API* ptr) {
+	if (ptr->deviceState != 0) {
+		fprintf(stderr, "Device must be closed prior to object destruction.\n");
+		return;
+	}
 
+	int count = ptr->deviceCount;
+	for (int i = 0; i < count; i++) free(ptr->deviceList[i]);
+	free(ptr->deviceList);
+	//free(ptr->ctx);
+	//free(ptr->device);
+
+	//free(ptr->OpenDevice);
+	//free(ptr->CreateContext);
+	//free(ptr->MakeContextCurrent);
+	//free(ptr->GetCurrentContext);
+	//free(ptr->GetContextsDevice);
+	//free(ptr->DestroyContext);
+	//free(ptr->IsExtensionPresent);
+	//free(ptr->GetString);
+	//free(ptr->CloseDevice);
+
+	free(ptr);
 }
 
 ///////////////////////
@@ -149,10 +183,17 @@ int countDeviceList(const char* list) {
 	return count;
 }
 
-void iterateDeviceList(OAL_API* ptr, int enumValue, int count) {
+void iterateDeviceList(OAL_API* ptr, int enumValue) {
 	char* list = ptr->GetString(NULL, enumValue);
-	
+	int count = ptr->deviceCount;
+
 	ptr->deviceList = (char**)malloc(sizeof(char*) * count);
+
+	if (!ptr->deviceList) {
+		fprintf(stderr, "Unable to allocate memory: DeviceList\n");
+		return;
+	}
+
 	for (int i = 0; i < count; i++) {
 		ptr->deviceList[i] = (char*)malloc(sizeof(char) * strlen(list) + 1);
 		strcpy(ptr->deviceList[i], list);
