@@ -268,11 +268,11 @@
 	"dependencies" : 
 	[
 		{
-			"backtrace" : 3,
-			"id" : "build_version::@0a95ca5a3c8e4e37e101"
+			"id" : "native-tools::@0a95ca5a3c8e4e37e101"
 		},
 		{
-			"id" : "native-tools::@0a95ca5a3c8e4e37e101"
+			"backtrace" : 3,
+			"id" : "build_version::@0a95ca5a3c8e4e37e101"
 		},
 		{
 			"backtrace" : 4,
