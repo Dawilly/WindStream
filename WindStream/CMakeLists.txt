@@ -3,15 +3,19 @@
 #
 cmake_minimum_required (VERSION 3.8)
 
-# Add source to this project's executable.
-include_directories(FileHandler)
+# Add source to this project's executable
 include_directories(APIHandler)
+include_directories(FileHandler)
+include_directories(ThreadHandler)
 
 set(FILEH FileHandler)
 set(APIH APIHandler)
+set(THREADH ThreadHandler)
+
 set(SOURCES mainTest.c WindStream.c WindStream.h 
 	${FILEH}/filehandler.c ${FILEH}/filehandler.h
-	${APIH}/openal_apihandler.c ${APIH}/apihandler.h)
+	${APIH}/openal_apihandler.c ${APIH}/apihandler.h
+	${THREADH}/win32_threadhandler.c ${THREADH}/win32_threadhandler.h)
 
 add_executable (WindStream ${SOURCES})
 

@@ -1,9 +1,14 @@
 #include "win32_threadhandler.h"
 
 typedef struct win32_thread {
-	void* value;
+	unsigned int threadPtr;
 } WIN32THREAD;
 
-void CreateThread() {
+WIN32THREAD* CreateWin32Thread() {
+	WIN32THREAD* newThread = malloc(sizeof(WIN32THREAD));
+	if (newThread == NULL) return NULL;
 
+	newThread->threadPtr = _beginthread(NULL, 0, 0);
+
+	return newThread;
 }
