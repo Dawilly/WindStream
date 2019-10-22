@@ -5,7 +5,7 @@ int main() {
 	int input;
 	printf("Devices for SMAPI to use for Audio...\n");
 
-	OAL_API* test = CreateOalApi(GetLibrary, GetFunctionAddresses);
+	OALAPI* test = CreateOalApi(GetLibrary, GetFunctionAddresses);
 	GetAllDevices(test);
 	PrintAllDevices(test);
 
