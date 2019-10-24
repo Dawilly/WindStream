@@ -13,10 +13,14 @@ set(APIH APIHandler)
 set(THREADH ThreadHandler)
 
 set(SOURCES mainTest.c WindStream.c WindStream.h 
-	${FILEH}/filehandler.c ${FILEH}/filehandler.h
-	${APIH}/openal_apihandler.c ${APIH}/apihandler.h
-	${THREADH}/win32_threadhandler.c ${THREADH}/win32_threadhandler.h
-	${THREADH}/threadhandler.h)
+	${APIH}/openal_apihandler.c 
+	${APIH}/apihandler.h
+	${THREADH}/win32_threadhandler.c 
+	${THREADH}/win32_threadhandler.h
+	${THREADH}/threadhandler.h
+	${FILEH}/filehandler.h 
+	${FILEH}/wav_filehandler.h 
+	${FILEH}/wav_filehandler.c)
 
 add_executable (WindStream ${SOURCES})
 

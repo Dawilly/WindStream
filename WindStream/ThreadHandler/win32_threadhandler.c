@@ -5,13 +5,15 @@ typedef struct win32_thread {
 	unsigned int hThread;
 	void* mutex;
 	int threadState;
-	void (*functionBootstrap)(void*);
+	void (*functionCall)(void*);
 
 	void* security;
 	unsigned int stackSize;
 	void* argList;
 	unsigned int initFlag;
 	unsigned int threadId;
+
+	int signal;
 } WIN32THREAD;
 
 WIN32THREAD* CreateWin32Thread() {
@@ -20,12 +22,13 @@ WIN32THREAD* CreateWin32Thread() {
 
 	newThread->threadState = UNSET;
 	newThread->mutex = NULL;
-	newThread->functionBootstrap = NULL;
+	newThread->functionCall = NULL;
 	newThread->security = NULL;
 	newThread->stackSize = 0;
 	newThread->argList = NULL;
 	newThread->initFlag = 0;
 	newThread->threadId = 0;
+	newThread->signal = 0;
 
 	return newThread;
 }
@@ -33,7 +36,7 @@ WIN32THREAD* CreateWin32Thread() {
 void SetFunction(WIN32THREAD* ptr, void (*function)(void*)) {
 	if (function == NULL) return;
 
-	ptr->functionBootstrap = function;
+	ptr->functionCall = function;
 	ptr->threadState = STOPPED;
 	return;
 }
@@ -44,7 +47,7 @@ BOOL StartThread(WIN32THREAD* ptr) {
 	ptr->hThread = _beginthreadex(
 		ptr->security, 
 		ptr->stackSize,
-		ptr->functionBootstrap, 
+		ptr->functionCall,
 		ptr->argList,
 		ptr->initFlag, 
 		&(ptr->threadId)
@@ -52,6 +55,20 @@ BOOL StartThread(WIN32THREAD* ptr) {
 
 	if (ptr->hThread == 0) return FALSE;
 
+	ptr->signal = 1;
 	ptr->threadState = RUNNING;
+
 	return TRUE;
+}
+
+void Bootstrapper(void* ptr) {
+	WIN32THREAD* tPtr = (WIN32THREAD*)ptr;
+
+	while (tPtr->signal) {
+		tPtr->functionCall(tPtr);
+	}
+}
+
+void StopThread(WIN32THREAD* ptr) {
+	ptr->signal = 0;
 }

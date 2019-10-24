@@ -112,14 +112,6 @@ build WindStream\CMakeFiles\WindStream.dir\WindStream.c.obj: C_COMPILER__WindStr
   TARGET_COMPILE_PDB = WindStream\CMakeFiles\WindStream.dir\
   TARGET_PDB = WindStream\WindStream.pdb
 
-build WindStream\CMakeFiles\WindStream.dir\FileHandler\filehandler.c.obj: C_COMPILER__WindStream ..\..\..\WindStream\FileHandler\filehandler.c || cmake_object_order_depends_target_WindStream
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
-  INCLUDES = -I..\..\..\WindStream\APIHandler -I..\..\..\WindStream\FileHandler -I..\..\..\WindStream\ThreadHandler -I..\..\..\OpenAL\include
-  OBJECT_DIR = WindStream\CMakeFiles\WindStream.dir
-  OBJECT_FILE_DIR = WindStream\CMakeFiles\WindStream.dir\FileHandler
-  TARGET_COMPILE_PDB = WindStream\CMakeFiles\WindStream.dir\
-  TARGET_PDB = WindStream\WindStream.pdb
-
 build WindStream\CMakeFiles\WindStream.dir\APIHandler\openal_apihandler.c.obj: C_COMPILER__WindStream ..\..\..\WindStream\APIHandler\openal_apihandler.c || cmake_object_order_depends_target_WindStream
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   INCLUDES = -I..\..\..\WindStream\APIHandler -I..\..\..\WindStream\FileHandler -I..\..\..\WindStream\ThreadHandler -I..\..\..\OpenAL\include
@@ -136,6 +128,14 @@ build WindStream\CMakeFiles\WindStream.dir\ThreadHandler\win32_threadhandler.c.o
   TARGET_COMPILE_PDB = WindStream\CMakeFiles\WindStream.dir\
   TARGET_PDB = WindStream\WindStream.pdb
 
+build WindStream\CMakeFiles\WindStream.dir\FileHandler\wav_filehandler.c.obj: C_COMPILER__WindStream ..\..\..\WindStream\FileHandler\wav_filehandler.c || cmake_object_order_depends_target_WindStream
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  INCLUDES = -I..\..\..\WindStream\APIHandler -I..\..\..\WindStream\FileHandler -I..\..\..\WindStream\ThreadHandler -I..\..\..\OpenAL\include
+  OBJECT_DIR = WindStream\CMakeFiles\WindStream.dir
+  OBJECT_FILE_DIR = WindStream\CMakeFiles\WindStream.dir\FileHandler
+  TARGET_COMPILE_PDB = WindStream\CMakeFiles\WindStream.dir\
+  TARGET_PDB = WindStream\WindStream.pdb
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target WindStream
@@ -144,7 +144,7 @@ build WindStream\CMakeFiles\WindStream.dir\ThreadHandler\win32_threadhandler.c.o
 #############################################
 # Link the executable WindStream\WindStream.exe
 
-build WindStream\WindStream.exe: C_EXECUTABLE_LINKER__WindStream WindStream\CMakeFiles\WindStream.dir\mainTest.c.obj WindStream\CMakeFiles\WindStream.dir\WindStream.c.obj WindStream\CMakeFiles\WindStream.dir\FileHandler\filehandler.c.obj WindStream\CMakeFiles\WindStream.dir\APIHandler\openal_apihandler.c.obj WindStream\CMakeFiles\WindStream.dir\ThreadHandler\win32_threadhandler.c.obj | OpenAL\OpenAL32.lib || OpenAL\OpenAL32.dll
+build WindStream\WindStream.exe: C_EXECUTABLE_LINKER__WindStream WindStream\CMakeFiles\WindStream.dir\mainTest.c.obj WindStream\CMakeFiles\WindStream.dir\WindStream.c.obj WindStream\CMakeFiles\WindStream.dir\APIHandler\openal_apihandler.c.obj WindStream\CMakeFiles\WindStream.dir\ThreadHandler\win32_threadhandler.c.obj WindStream\CMakeFiles\WindStream.dir\FileHandler\wav_filehandler.c.obj | OpenAL\OpenAL32.lib || OpenAL\OpenAL32.dll
   FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = OpenAL\OpenAL32.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
