@@ -1,4 +1,5 @@
 #include "wav_filehandler.h"
+#include "wav_filestructure.h"
 
 typedef struct wav_file {
 	FILE* fp;

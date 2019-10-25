@@ -23,6 +23,7 @@ set(SOURCES mainTest.c WindStream.c WindStream.h
 	${THREADH}/win32_threadhandler.h
 	
 	${FILEH}/filehandler.h 
+	${FILEH}/wav_filestructure.h
 	${FILEH}/wav_filehandler.h 
 	${FILEH}/wav_filehandler.c)
 

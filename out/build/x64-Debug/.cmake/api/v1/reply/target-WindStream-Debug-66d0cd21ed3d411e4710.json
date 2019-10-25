@@ -29,13 +29,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 29,
+				"line" : 30,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 31,
+				"line" : 32,
 				"parent" : 0
 			},
 			{
@@ -93,7 +93,7 @@
 				1,
 				5,
 				7,
-				11
+				12
 			]
 		}
 	],
@@ -141,7 +141,7 @@
 				1,
 				5,
 				7,
-				11
+				12
 			]
 		},
 		{
@@ -154,7 +154,8 @@
 				6,
 				8,
 				9,
-				10
+				10,
+				11
 			]
 		}
 	],
@@ -212,6 +213,11 @@
 		{
 			"backtrace" : 1,
 			"path" : "WindStream/FileHandler/filehandler.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "WindStream/FileHandler/wav_filestructure.h",
 			"sourceGroupIndex" : 1
 		},
 		{
