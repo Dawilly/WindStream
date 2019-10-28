@@ -233,3 +233,11 @@
 10	273	592427477	OpenAL/native-tools/bsincgen	40db3c04ea6a569a
 273	873	593858643	WindStream/CMakeFiles/WindStream.dir/FileHandler/wav_filehandler.c.obj	4ef236c7c8a67786
 873	1065	593858644	WindStream/WindStream.exe	43ec2884eceab3e
+14	146	0	OpenAL/CMakeFiles/build_version	23fd6b4f041bb9e9
+10	399	592427477	OpenAL/native-tools/bin2h	40db3c04ea6a569a
+10	399	592427477	OpenAL/native-tools/bsincgen	40db3c04ea6a569a
+14	133	0	OpenAL/CMakeFiles/build_version	23fd6b4f041bb9e9
+11	260	592427477	OpenAL/native-tools/bin2h	40db3c04ea6a569a
+11	260	592427477	OpenAL/native-tools/bsincgen	40db3c04ea6a569a
+260	860	593973141	WindStream/CMakeFiles/WindStream.dir/FileHandler/wav_filehandler.c.obj	4ef236c7c8a67786
+860	1131	593973141	WindStream/WindStream.exe	43ec2884eceab3e

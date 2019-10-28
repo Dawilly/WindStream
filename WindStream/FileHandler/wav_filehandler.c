@@ -7,6 +7,8 @@ typedef struct wav_file {
 	WAVHEADER* header;
 } WAVFILE;
 
+
+
 WAVFILE* CreateWavFile() {
 	WAVFILE* newFile = malloc(sizeof(WAVFILE));
 	if (newFile == NULL) {
@@ -64,7 +66,11 @@ void ReadWavHeader(WAVFILE* ptr) {
 	switch (fmt->Subchunk1Size) {
 		case 16:
 			fmt->details = malloc(sizeof(FMTDETAILCHUNK16));
-			ReadDetailsSize16(ptr->fp, fmt->details);
+			if (fmt->details == 0) {
+				// Error out
+				return;
+			}
+			fread(fmt->details, sizeof(FMTDETAILCHUNK16), 1, ptr->fp);
 			break;
 		case 18:
 			break;
@@ -78,18 +84,9 @@ void ReadWavHeader(WAVFILE* ptr) {
 	return;
 }
 
-// Private Functions //
+void ReadWavSamples(WAVFILE* ptr) {
 
-void ReadDetailsSize16(FILE* fp, FMTDETAILCHUNK16* details) {
-	fread(details->AudioFormat, sizeof(short), 1, fp);
-	fread(details->NumChannels, sizeof(short), 1, fp);
-	fread(details->SampleRate, sizeof(int), 1, fp);
-	fread(details->ByteRate, sizeof(int), 1, fp);
-	fread(details->BlockAlign, sizeof(short), 1, fp);
-	fread(details->BitsPerSample, sizeof(short), 1, fp);
-	return;
 }
-
 //size_t fread(void* ptr, size_t size_of_elements, size_t number_of_elements, FILE* a_file);
 
 //size_t fwrite(const void* ptr, size_t size_of_elements, size_t number_of_elements, FILE* a_file);
