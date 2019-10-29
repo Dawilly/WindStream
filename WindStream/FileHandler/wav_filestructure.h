@@ -4,13 +4,13 @@
 #define __WAVFILESTRUCTURE__INCLUDED__
 
 typedef struct riff_chunk {
-	byte ChunkId[4];
+	byte ChunkId[5];
 	int ChunkSize;
-	byte Format[4];
+	byte Format[5];
 } RIFFCHUNK;
 
 typedef struct fmt_chunk {
-	byte Subchunk1ID[4];
+	byte Subchunk1ID[5];
 	int Subchunk1Size;
 	void* details;
 } FMTCHUNK;
@@ -30,7 +30,7 @@ typedef struct wav_header {
 } WAVHEADER;
 
 typedef struct wav_data {
-	byte Subchunk2ID[4];
+	byte Subchunk2ID[5];
 	unsigned int Subchunk2Size;
 
 } WAVDATA;

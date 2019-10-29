@@ -146,6 +146,10 @@ void GetAllDevices(OALAPI* ptr) {
 	return;
 }
 
+int GetDeviceCount(OALAPI* ptr) {
+	return ptr->deviceCount;
+}
+
 void PrintAllDevices(OALAPI* ptr) {
 	int count = ptr->deviceCount;
 	for (int i = 0; i < count; i++) {

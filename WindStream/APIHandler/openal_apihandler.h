@@ -14,4 +14,6 @@ void GetAllDevices(OALAPI*);
 void PrintAllDevices(OALAPI*);
 void DestroyOalApi(OALAPI*);
 
+int GetDeviceCount(OALAPI*);
+
 #endif // !__OPENALHANDLER__INCLUDED__

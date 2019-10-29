@@ -9,4 +9,8 @@
 
 typedef struct wav_file WAVFILE;
 
+WAVFILE* CreateWavFile();
+void OpenWavFile(WAVFILE*, char*);
+void ReadWavHeader(WAVFILE*);
+
 #endif // !__WAVFILEHANDLER__INCLUDED__
