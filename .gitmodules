@@ -1,3 +1,9 @@
 [submodule "OpenAL"]
 	path = OpenAL
 	url = https://github.com/kcat/openal-soft.git
+[submodule "Vorbis"]
+	path = Vorbis
+	url = https://github.com/xiph/vorbis.git
+[submodule "Flac"]
+	path = Flac
+	url = https://github.com/xiph/flac

@@ -6,13 +6,16 @@ typedef struct wav_file {
 	FILE* fp;
 	byte fileState;
 	WAVHEADER* header;
+
+	unsigned int totalSamples;
+	float* data;
 } WAVFILE;
 
 bool ReadRiffChunk(WAVFILE*);
-int ReadFmtTopChunk(WAVFILE*);
+int ReadFmtChunk(WAVFILE*);
+bool ReadDataChunk(WAVFILE*);
 void ReadCString(FILE*, char*, int);
 void PrintWavFileInfo(WAVFILE*);
-void PrintDetails16(FMTDETAILCHUNK16*);
 
 WAVFILE* CreateWavFile() {
 	WAVFILE* newFile = malloc(sizeof(WAVFILE));
@@ -33,6 +36,9 @@ WAVFILE* CreateWavFile() {
 
 	newFile->header->riff = malloc(sizeof(RIFFCHUNK));
 	newFile->header->fmt = malloc(sizeof(FMTCHUNK));
+	newFile->header->data = malloc(sizeof(DATACHUNK));
+
+	// TO-DO: Check for errors
 
 	return newFile;
 }
@@ -67,25 +73,6 @@ void ReadWavHeader(WAVFILE* ptr) {
 		return;
 	}
 
-	switch (fmt->Subchunk1Size) {
-	case 16:
-		fmt->details = malloc(sizeof(FMTDETAILCHUNK16));
-		if (fmt->details == 0) {
-			// Error out
-			return;
-		}
-		fread(fmt->details, sizeof(FMTDETAILCHUNK16), 1, ptr->fp);
-		
-		break;
-	case 18:
-		break;
-	case 40:
-		break;
-	default:
-		// Error out
-		break;
-	}
-
 	PrintWavFileInfo(ptr);
 
 	return;
@@ -95,33 +82,31 @@ void ReadWavSamples(WAVFILE* ptr) {
 
 }
 
+/// Private Functions ///
+
 void PrintWavFileInfo(WAVFILE* ptr) {
+	RIFFCHUNK* riff = ptr->header->riff;
+	FMTCHUNK* fmt = ptr->header->fmt;
+
+	printf("\nFile:\n");
 	printf("File Name: %s\n", ptr->fileName);
 	printf("File State: %d\n", ptr->fileState);
-	printf("Chunk Size: %d\n", ptr->header->riff->ChunkSize);
-	printf("Sub Chunk 1 Size: %d\n", ptr->header->fmt->Subchunk1Size);
 
-	switch (ptr->header->fmt->Subchunk1Size) {
-		case 16:
-			PrintDetails16(ptr->header->fmt->details);
-			break;
-		case 18:
-			break;
-		case 40:
-			break;
-		default:
-			break;
-	}
-	return;
-}
+	printf("\nRIFF Chunk:\n");
+	printf("Chunk Id: %s\n", riff->ChunkId);
+	printf("Chunk Size: %d\n", riff->ChunkSize);
+	printf("Format: %s\n", riff->Format);
 
-void PrintDetails16(FMTDETAILCHUNK16* details) {
-	printf("Audio Format: %d\n", details->AudioFormat);
-	printf("Number of Channels: %d\n", details->NumChannels);
-	printf("Sample Rate: %d\n", details->SampleRate);
-	printf("Byte Rate: %d\n", details->ByteRate);
-	printf("Block Align: %d\n", details->BlockAlign);
-	printf("Bits Per Sample: %d\n", details->BitsPerSample);
+	printf("\nFMT Chunk:\n");
+	printf("Sub Chunk 1 Id: %s\n", fmt->Subchunk1ID);
+	printf("Sub Chunk 1 Size: %d\n", fmt->Subchunk1Size);
+	printf("Audio Format: %d\n", fmt->AudioFormat);
+	printf("Number of Channels: %d\n", fmt->NumChannels);
+	printf("Sample Rate: %d\n", fmt->SampleRate);
+	printf("Byte Rate: %d\n", fmt->ByteRate);
+	printf("Block Align: %d\n", fmt->BlockAlign);
+	printf("Bits Per Sample: %d\n", fmt->BitsPerSample);
+	// Extension Data goes here
 }
 
 bool ReadRiffChunk(WAVFILE* ptr) {
@@ -144,7 +129,7 @@ bool ReadRiffChunk(WAVFILE* ptr) {
 	return TRUE;
 }
 
-int ReadFmtTopChunk(WAVFILE* ptr) {
+int ReadFmtChunk(WAVFILE* ptr) {
 	FMTCHUNK* fmt = ptr->header->fmt;
 
 	ReadCString(ptr->fp, fmt->Subchunk1ID, 4);
@@ -156,10 +141,23 @@ int ReadFmtTopChunk(WAVFILE* ptr) {
 	return (fread(&fmt->Subchunk1Size, sizeof(int), 1, ptr->fp)) == 0 ? 0 : fmt->Subchunk1Size;
 }
 
+bool ReadDataChunk(WAVFILE* ptr) {
+	DATACHUNK* data = ptr->header->data;
+	ReadCString(ptr->fp, data->Subchunk2ID, 4);
+	if (strcmp("data", data->Subchunk2ID) != 0) {
+		printf("Error: Subchunk2ID is not data.\nSubchunk2ID: %s\n", data->Subchunk2ID);
+		return FALSE;
+	}
+	
+	ptr->totalSamples = data->Subchunk2Size / (ptr->header->fmt->BitsPerSample / 8);
+	ptr->data = malloc(sizeof(float) * ptr->totalSamples);
+	
+	// To-Do: Add malloc check
+
+	return TRUE;
+}
+
 void ReadCString(FILE* fp, char* str, int size) {
 	fread(str, sizeof(char), 4, fp);
 	str[size] = '\0';
 }
-//size_t fread(void* ptr, size_t size_of_elements, size_t number_of_elements, FILE* a_file);
-
-//size_t fwrite(const void* ptr, size_t size_of_elements, size_t number_of_elements, FILE* a_file);
