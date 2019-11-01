@@ -9,6 +9,8 @@ typedef struct wav_file {
 
 	unsigned int totalSamples;
 	float* data;
+	long startingPos;
+	long decodedCount;
 } WAVFILE;
 
 bool ReadRiffChunk(WAVFILE*);
@@ -65,13 +67,21 @@ void ReadWavHeader(WAVFILE* ptr) {
 	if (ptr->fileState != OPEN) return;
 
 	FMTCHUNK* fmt = ptr->header->fmt;
+	DATACHUNK* data = ptr->header->data;
 
 	if (ReadRiffChunk(ptr) == FALSE) return;
 
-	if (ReadFmtTopChunk(ptr) == 0) {
-		printf("Unable to read a support SubChunk1Size.\nSubChunk1Size: %d\n", fmt->Subchunk1Size);
-		return;
-	}
+	if (ReadFmtChunk(ptr) == FALSE) return;
+
+	// This is temp. For now the focus is SubChunk1Size = 16
+	if (fmt->Subchunk1Size != 16) return;
+
+	if (ReadDataChunk(ptr) == FALSE) return;
+
+	ptr->totalSamples = data->Subchunk2Size / (fmt->BitsPerSample / 8);
+	ptr->data = malloc(sizeof(float) * ptr->totalSamples);
+	ptr->startingPos = ftell(ptr);
+	ptr->decodedCount = 0;
 
 	PrintWavFileInfo(ptr);
 
@@ -82,7 +92,9 @@ void ReadWavSamples(WAVFILE* ptr) {
 
 }
 
+/////////////////////////
 /// Private Functions ///
+/////////////////////////
 
 void PrintWavFileInfo(WAVFILE* ptr) {
 	RIFFCHUNK* riff = ptr->header->riff;
@@ -129,16 +141,24 @@ bool ReadRiffChunk(WAVFILE* ptr) {
 	return TRUE;
 }
 
-int ReadFmtChunk(WAVFILE* ptr) {
+bool ReadFmtChunk(WAVFILE* ptr) {
 	FMTCHUNK* fmt = ptr->header->fmt;
 
 	ReadCString(ptr->fp, fmt->Subchunk1ID, 4);
 	if (strcmp("fmt ", fmt->Subchunk1ID) != 0) {
 		printf("Error: SubChunk1ID is not fmt .\nSubChunk1ID: %s\n", fmt->Subchunk1ID);
-		return 0;
+		return FALSE;
 	}
 
-	return (fread(&fmt->Subchunk1Size, sizeof(int), 1, ptr->fp)) == 0 ? 0 : fmt->Subchunk1Size;
+	fread(&fmt->Subchunk1Size, sizeof(uint32_t), 1, ptr->fp);
+	fread(&fmt->AudioFormat, sizeof(uint16_t), 1, ptr->fp);
+	fread(&fmt->NumChannels, sizeof(uint16_t), 1, ptr->fp);
+	fread(&fmt->SampleRate, sizeof(uint32_t), 1, ptr->fp);
+	fread(&fmt->ByteRate, sizeof(uint32_t), 1, ptr->fp);
+	fread(&fmt->BlockAlign, sizeof(uint16_t), 1, ptr->fp);
+	fread(&fmt->BitsPerSample, sizeof(uint32_t), 1, ptr->fp);
+
+	return TRUE;
 }
 
 bool ReadDataChunk(WAVFILE* ptr) {
@@ -148,10 +168,6 @@ bool ReadDataChunk(WAVFILE* ptr) {
 		printf("Error: Subchunk2ID is not data.\nSubchunk2ID: %s\n", data->Subchunk2ID);
 		return FALSE;
 	}
-	
-	ptr->totalSamples = data->Subchunk2Size / (ptr->header->fmt->BitsPerSample / 8);
-	ptr->data = malloc(sizeof(float) * ptr->totalSamples);
-	
 	// To-Do: Add malloc check
 
 	return TRUE;
