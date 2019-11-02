@@ -7,3 +7,6 @@
 [submodule "Flac"]
 	path = Flac
 	url = https://github.com/xiph/flac
+[submodule "Ogg"]
+	path = Ogg
+	url = https://github.com/xiph/ogg.git

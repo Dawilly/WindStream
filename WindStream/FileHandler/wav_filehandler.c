@@ -7,17 +7,24 @@ typedef struct wav_file {
 	byte fileState;
 	WAVHEADER* header;
 
-	unsigned int totalSamples;
+	unsigned long totalSamples;
 	float* data;
-	long startingPos;
+	void* wArray;
+	long wArrayLength;
+	long startingPosOfFile;
 	long decodedCount;
+	long pointOnDataArray;
+	
+	void (*ReadSamples)(WAVFILE*, long);
 } WAVFILE;
 
+void ReadSamplesSize8(WAVFILE*, long);
+void ReadSamplesSize16(WAVFILE*, long);
+void ReadSamplesSize32(WAVFILE*, long);
 bool ReadRiffChunk(WAVFILE*);
 int ReadFmtChunk(WAVFILE*);
 bool ReadDataChunk(WAVFILE*);
 void ReadCString(FILE*, char*, int);
-void PrintWavFileInfo(WAVFILE*);
 
 WAVFILE* CreateWavFile() {
 	WAVFILE* newFile = malloc(sizeof(WAVFILE));
@@ -66,35 +73,47 @@ void OpenWavFile(WAVFILE* ptr, char* filename) {
 void ReadWavHeader(WAVFILE* ptr) {
 	if (ptr->fileState != OPEN) return;
 
-	FMTCHUNK* fmt = ptr->header->fmt;
-	DATACHUNK* data = ptr->header->data;
-
 	if (ReadRiffChunk(ptr) == FALSE) return;
 
 	if (ReadFmtChunk(ptr) == FALSE) return;
 
 	// This is temp. For now the focus is SubChunk1Size = 16
-	if (fmt->Subchunk1Size != 16) return;
+	if (ptr->header->fmt->Subchunk1Size != 16) return;
 
 	if (ReadDataChunk(ptr) == FALSE) return;
-
-	ptr->totalSamples = data->Subchunk2Size / (fmt->BitsPerSample / 8);
-	ptr->data = malloc(sizeof(float) * ptr->totalSamples);
-	ptr->startingPos = ftell(ptr);
-	ptr->decodedCount = 0;
-
-	PrintWavFileInfo(ptr);
 
 	return;
 }
 
-void ReadWavSamples(WAVFILE* ptr) {
+void SetupWavFile(WAVFILE* ptr) {
+	FMTCHUNK* fmt = ptr->header->fmt;
+	DATACHUNK* data = ptr->header->data;
 
+	ptr->totalSamples = data->Subchunk2Size / (fmt->BitsPerSample / 8);
+	ptr->data = malloc(sizeof(float) * ptr->totalSamples);
+	ptr->startingPosOfFile = ftell(ptr);
+	ptr->decodedCount = 0;
+
+	if (fmt->BitsPerSample == 8) {
+		//ptr->wArray = malloc
+		//ptr->ReadSamples = ReadSamplesSize8;
+	}
+	else if (fmt->BitsPerSample == 16) {
+		ptr->ReadSamples = ReadSamplesSize16;
+	}
+	else if (fmt->BitsPerSample == 32) {
+		ptr->ReadSamples = ReadSamplesSize32;
+	}
+	else {
+		// Error out.
+		return;
+	}
 }
 
-/////////////////////////
-/// Private Functions ///
-/////////////////////////
+void ReadWavSamples(WAVFILE* ptr) {
+	long count = min(ptr->totalSamples - ptr->decodedCount, ptr->wArrayLength);
+	ptr->ReadSamples(ptr, count);
+}
 
 void PrintWavFileInfo(WAVFILE* ptr) {
 	RIFFCHUNK* riff = ptr->header->riff;
@@ -119,6 +138,35 @@ void PrintWavFileInfo(WAVFILE* ptr) {
 	printf("Block Align: %d\n", fmt->BlockAlign);
 	printf("Bits Per Sample: %d\n", fmt->BitsPerSample);
 	// Extension Data goes here
+}
+
+/////////////////////////
+/// Private Functions ///
+/////////////////////////
+
+void ReadSamplesSize8(WAVFILE* ptr, long count) {
+	
+}
+
+void ReadSamplesSize16(WAVFILE* ptr, long count) {
+	short* wArray = ptr->wArray;
+	
+	// May need to take lock, doc.
+	fread(wArray, sizeof(int16_t), count, ptr->fp);
+
+	for (long i = 0; i < count; i++) {
+		ptr->data[ptr->pointOnDataArray + i] = (wArray[i] / (float)SIGNEDSHORTMAX);
+	}
+
+	return;
+}
+
+void ReadSamplesSize32(WAVFILE* ptr, long count) {
+	float* wArray = ptr->wArray;
+
+	fread(wArray, sizeof(float), count, ptr->fp);
+	
+	return;
 }
 
 bool ReadRiffChunk(WAVFILE* ptr) {
