@@ -22,15 +22,15 @@ typedef struct fmt_chunk {
 	// Extension Data goes here
 } FMTCHUNK;
 
+typedef struct data_chunk {
+	byte Subchunk2ID[5];
+	uint32_t Subchunk2Size;
+} DATACHUNK;
+
 typedef struct wav_header {
 	RIFFCHUNK* riff;
 	FMTCHUNK* fmt;
 	DATACHUNK* data;
 } WAVHEADER;
-
-typedef struct data_chunk {
-	byte Subchunk2ID[5];
-	uint32_t Subchunk2Size;
-} DATACHUNK;
 
 #endif // !__WAVFILESTRUCTURE__INCLUDED__

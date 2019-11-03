@@ -41,7 +41,7 @@ void SetFunction(WIN32THREAD* ptr, void (*function)(void*)) {
 	return;
 }
 
-BOOL StartThread(WIN32THREAD* ptr) {
+bool StartThread(WIN32THREAD* ptr) {
 	if (ptr->threadState == UNSET) return FALSE;
 
 	ptr->hThread = _beginthreadex(

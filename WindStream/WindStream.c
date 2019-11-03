@@ -3,7 +3,7 @@
 
 #include "WindStream.h"
 
-BOOL GetFunctionAddresses(void* lib, void** ptrArray, char** funcNames, int count) {
+bool GetFunctionAddresses(void* lib, void** ptrArray, char** funcNames, int count) {
 	int i;
 	
 	if (lib != NULL) {
@@ -17,12 +17,12 @@ BOOL GetFunctionAddresses(void* lib, void** ptrArray, char** funcNames, int coun
 }
 
 #if defined(_WIN32)
-BOOL GetLibrary(char* filePath, void** out) {
+bool GetLibrary(char* filePath, void** out) {
 	(*out) = LoadLibrary(filePath);
 	return ((*out) != NULL);
 }
 #else
-BOOL GetLibrary(char* filePath, void** out) {
+bool GetLibrary(char* filePath, void** out) {
 	(*out) = dlopen(filePath, RTLD_LAZY);
 	return ((*out) != NULL);
 }

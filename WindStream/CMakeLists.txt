@@ -8,6 +8,9 @@ include_directories(APIHandler)
 include_directories(FileHandler)
 include_directories(ThreadHandler)
 
+set(CMAKE_C_FLAGS, "-ldl")
+set(CMAKE_CXX_FLAGS, "-ldl")
+
 set(BASE .)
 set(FILEH FileHandler)
 set(APIH APIHandler)

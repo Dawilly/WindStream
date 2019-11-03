@@ -1,5 +1,5 @@
-#include "wav_filehandler.h"
 #include "wav_filestructure.h"
+#include "wav_filehandler.h"
 
 typedef struct wav_file {
 	char* fileName;
@@ -91,7 +91,7 @@ void SetupWavFile(WAVFILE* ptr) {
 
 	ptr->totalSamples = data->Subchunk2Size / (fmt->BitsPerSample / 8);
 	ptr->data = malloc(sizeof(float) * ptr->totalSamples);
-	ptr->startingPosOfFile = ftell(ptr);
+	ptr->startingPosOfFile = ftell(ptr->fp);
 	ptr->decodedCount = 0;
 
 	if (fmt->BitsPerSample == 8) {

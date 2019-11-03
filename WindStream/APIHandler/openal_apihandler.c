@@ -141,7 +141,7 @@ OALAPI* CreateOalApi(int (*dylibopen)(char*, void*), int (*dylibsym)(void*, void
 void GetAllDevices(OALAPI* ptr) {
 	if (ptr->IsExtensionPresent(NULL, "ALC_ENUMERATE_ALL_EXT") != FALSE) {
 		ptr->deviceCount = countDeviceList(ptr->GetString(NULL, 0x1013));
-		iterateDeviceList(ptr, 0x1013, ptr->deviceCount);
+		iterateDeviceList(ptr, 0x1013);
 	}
 	return;
 }

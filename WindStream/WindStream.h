@@ -16,9 +16,10 @@
 #else
 #include <dlfcn.h>
 #define GETLIBFUNCTION dlsym
+#define LIBRARYNAME "libopenal.so"
 #endif
 
-BOOL GetFunctionAddresses(void*, void**, char**, int);
-BOOL GetLibrary(char*, void**);
+bool GetFunctionAddresses(void*, void**, char**, int);
+bool GetLibrary(char*, void**);
 
 #endif
