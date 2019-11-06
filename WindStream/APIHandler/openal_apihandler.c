@@ -48,7 +48,6 @@ const int numberOfFuncs = 24;
 void openDefaultDevice(OALAPI*);
 void iterateDeviceList(OALAPI*, int);
 int countDeviceList(const char*);
-void cleanUp(int, ...);
 
 OALAPI* CreateOalApi(int (*dylibopen)(char*, void*), int (*dylibsym)(void*, void**, char**, int)) {
 	OALAPI* newAPI;
@@ -263,13 +262,4 @@ void openDefaultDevice(OALAPI* ptr) {
 		fprintf(stderr, "Unable to open default device!\n");
 	}
 	return;
-}
-
-void cleanUp(int count, ...) {
-	va_list arg;
-	va_start(arg, count);
-	for (int i = 0; i < count; i++) {
-		free(va_arg(arg, void*));
-	}
-	va_end(arg);
 }

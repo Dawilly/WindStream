@@ -24,6 +24,8 @@ set(SOURCES mainTest.c WindStream.c WindStream.h
 	${THREADH}/threadhandler.h
 	${THREADH}/win32_threadhandler.c 
 	${THREADH}/win32_threadhandler.h
+	${THREADH}/iso11_threadhandler.cpp
+	${THREADH}/iso11_threadhandler.h
 	
 	${FILEH}/filehandler.h 
 	${FILEH}/wav_filestructure.h

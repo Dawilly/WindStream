@@ -3,6 +3,15 @@
 
 #include "WindStream.h"
 
+void WindStream() {
+	bool Running = TRUE;
+
+	while (Running) {
+
+	}
+
+}
+
 bool GetFunctionAddresses(void* lib, void** ptrArray, char** funcNames, int count) {
 	int i;
 	
