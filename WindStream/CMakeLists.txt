@@ -8,15 +8,15 @@ include_directories(APIHandler)
 include_directories(FileHandler)
 include_directories(ThreadHandler)
 
-set(CMAKE_C_FLAGS, "-ldl")
-set(CMAKE_CXX_FLAGS, "-ldl")
-
 set(BASE .)
 set(FILEH FileHandler)
 set(APIH APIHandler)
 set(THREADH ThreadHandler)
 
-set(SOURCES mainTest.c WindStream.c WindStream.h 
+set(SOURCES 
+	Test.c
+	WindStream.c 
+	WindStream.h 
 	${BASE}/definitions.h
 	${APIH}/apihandler.h
 	${APIH}/openal_apihandler.c 
@@ -24,8 +24,6 @@ set(SOURCES mainTest.c WindStream.c WindStream.h
 	${THREADH}/threadhandler.h
 	${THREADH}/win32_threadhandler.c 
 	${THREADH}/win32_threadhandler.h
-	${THREADH}/iso11_threadhandler.cpp
-	${THREADH}/iso11_threadhandler.h
 	
 	${FILEH}/filehandler.h 
 	${FILEH}/wav_filestructure.h
@@ -33,7 +31,5 @@ set(SOURCES mainTest.c WindStream.c WindStream.h
 	${FILEH}/wav_filehandler.c)
 
 add_executable (WindStream ${SOURCES})
-
-target_link_libraries(WindStream OpenAL)
 
 # TODO: Add tests and install targets if needed.

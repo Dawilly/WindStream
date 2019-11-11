@@ -7,7 +7,5 @@ project ("WindStream")
 
 # Include sub-projects.
 add_subdirectory ("WindStream")
-add_subdirectory ("OpenAL")
-# add_subdirectory ("Ogg")
-# add_subdirectory ("Flac")
-# add_subdirectory ("Vorbis")
+#add_subdirectory ("Test")
+#add_subdirectory ("OpenAL")

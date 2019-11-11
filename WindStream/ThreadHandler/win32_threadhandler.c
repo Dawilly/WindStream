@@ -3,7 +3,7 @@
 
 typedef struct win32_thread {
 	unsigned int hThread;
-	void* mutex;
+	void* lock;
 	int threadState;
 	void (*functionCall)(void*);
 
@@ -16,12 +16,14 @@ typedef struct win32_thread {
 	int signal;
 } WIN32THREAD;
 
+void Bootstrapper(void*);
+
 WIN32THREAD* CreateWin32Thread() {
 	WIN32THREAD* newThread = malloc(sizeof(WIN32THREAD));
 	if (newThread == NULL) return NULL;
 
 	newThread->threadState = UNSET;
-	newThread->mutex = NULL;
+	newThread->lock = NULL;
 	newThread->functionCall = NULL;
 	newThread->security = NULL;
 	newThread->stackSize = 0;
@@ -47,8 +49,8 @@ bool StartThread(WIN32THREAD* ptr) {
 	ptr->hThread = _beginthreadex(
 		ptr->security, 
 		ptr->stackSize,
-		ptr->functionCall,
-		ptr->argList,
+		(void(*)(void*))Bootstrapper,
+		(void*)ptr,
 		ptr->initFlag, 
 		&(ptr->threadId)
 	);
@@ -62,13 +64,20 @@ bool StartThread(WIN32THREAD* ptr) {
 }
 
 void Bootstrapper(void* ptr) {
-	WIN32THREAD* tPtr = (WIN32THREAD*)ptr;
-
-	while (tPtr->signal) {
-		tPtr->functionCall(tPtr);
+	WIN32THREAD* winPtr = (WIN32THREAD*)ptr;
+	while (winPtr->signal) {
+		winPtr->functionCall(winPtr);
 	}
 }
 
 void StopThread(WIN32THREAD* ptr) {
 	ptr->signal = 0;
+}
+
+void SetResource() {
+
+}
+
+void CreateLock() {
+
 }
