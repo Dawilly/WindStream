@@ -19,6 +19,28 @@
 #define LIBRARYNAME "libopenal.so"
 #endif
 
+typedef enum apitype {
+	Auto,
+	OpenAL,
+	PortAudio,
+	OSX_CoreAudio,
+	WIN_XAudio2,
+	NIX_Alsa
+} ApiType;
+
+typedef enum filetype {
+	Wave,
+	Flac,
+	Ogg
+} FileType;
+
+typedef enum os {
+	Windows,
+	OSX,
+	Linux,
+	Unknown
+} OS;
+
 bool GetFunctionAddresses(void*, void**, char**, int);
 bool GetLibrary(char*, void**);
 

@@ -17,5 +17,6 @@ WIN32THREAD* CreateWin32Thread();
 void SetFunction(WIN32THREAD*, void (*function)(void*));
 bool StartThread(WIN32THREAD*);
 void StopThread(WIN32THREAD*);
+void CreateLock(WIN32THREAD*);
 
 #endif //!__WIN32THREADHANDLER__INCLUDED__

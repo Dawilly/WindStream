@@ -2,7 +2,7 @@
 #include "../WindStream.h"
 
 typedef struct win32_thread {
-	unsigned int hThread;
+	void* hThread;
 	void* lock;
 	int threadState;
 	void (*functionCall)(void*);
@@ -46,7 +46,7 @@ void SetFunction(WIN32THREAD* ptr, void (*function)(void*)) {
 bool StartThread(WIN32THREAD* ptr) {
 	if (ptr->threadState == UNSET) return FALSE;
 
-	ptr->hThread = _beginthreadex(
+	ptr->hThread = CreateThread(
 		ptr->security, 
 		ptr->stackSize,
 		(void(*)(void*))Bootstrapper,
@@ -78,6 +78,6 @@ void SetResource() {
 
 }
 
-void CreateLock() {
-
+void CreateLock(WIN32THREAD* ptr) {
+	ptr->lock = CreateMutexW(NULL, FALSE, NULL);
 }
