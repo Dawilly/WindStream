@@ -4,10 +4,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "definitions.h"
+#include "helpers.h"
 
 #ifndef __WINDSTREAM__INCLUDED__
 #define __WINDSTREAM__INCLUDED__
-
 
 #if defined(_WIN32) 
 #include <windows.h>
@@ -37,11 +37,10 @@ typedef enum filetype {
 typedef enum os {
 	Windows,
 	OSX,
-	Linux,
-	Unknown
+	Linux
 } OS;
 
-extern void WindStream(ApiType);
+void WindStream(ApiType);
 bool GetFunctionAddresses(void*, void**, char**, int);
 bool GetLibrary(char*, void**);
 

@@ -1,15 +1,18 @@
 ﻿// WindStream.c : Defines the entry point for the application.
 
 #include "WindStream.h"
-#include "openal_apihandler.h"
+#include "APIHandler/apihandler.h"
 
 typedef struct windstreamSettings {
 	void* ApiCalls;
 	void* ThreadCalls;
 } WSettings;
 
+void WindStreamImpl();
+void* SetupApiCalls(ApiType);
+
 void WindStream(ApiType apiType) {
-	WSettings* settings = malloc(sizeof(WSettings));
+	WSettings* settings = Cmalloc(sizeof(WSettings), "WindStream.settings", TRUE);
 	settings->ApiCalls = SetupApiCalls(apiType);
 	
 }
@@ -18,7 +21,9 @@ void GetInfo() {
 
 }
 
-// Private Functions // 
+///////////////////////
+// Private Functions //
+///////////////////////
 
 void WindStreamImpl() {
 	bool Running = TRUE;
@@ -29,22 +34,7 @@ void WindStreamImpl() {
 }
 
 void* SetupApiCalls(ApiType apiType) {
-	switch (apiType) {
-		case Auto:
-			return NULL;
-		case OpenAL:
-			return CreateOalApi(GetLibrary, GetFunctionAddresses);
-		case PortAudio:
-			return NULL;
-		case OSX_CoreAudio:
-			return NULL;
-		case WIN_XAudio2:
-			return NULL;
-		case NIX_Alsa:
-			return NULL;
-		default:
-			return NULL;
-	}
+
 }
 
 bool GetFunctionAddresses(void* lib, void** ptrArray, char** funcNames, int count) {

@@ -1,5 +1,5 @@
 #include "WindStream.h"
-#include "APIHandler/openal_apihandler.h"
+#include "APIHandler/apihandler.h"
 #include "FileHandler/wav_filehandler.h"
 #include "ThreadHandler/win32_threadhandler.h"
 
@@ -10,35 +10,32 @@ void testFunction(void* test) {
 }
 
 int main() {
-	int input;
-	int count;
-	OALAPI* test = CreateOalApi(GetLibrary, GetFunctionAddresses);
 	WAVFILE* file = CreateWavFile();
+	ApiHandler* apiPtr = CreateInstance(OpenAL);
+	int count = apiPtr->Get_Devices(apiPtr->instance);
+	int input;
 
 	printf("Devices for SMAPI to use for Audio...\n");
-	GetAllDevices(test);
-	PrintAllDevices(test);
-	count = GetDeviceCount(test);
+	apiPtr->PrintDevices(apiPtr->instance);
 
 	printf("\n\nSelect a device: ");
-	do {
-		scanf("%d", &input);
-		if (input < 0 || input > count) {
-			printf("Invalid input. Try again.\n");
-		}
-	} while (input < 0 || input > count);
+	ScanForIntInRange(stdin, &input, 0, count);
 
 	printf("Opening Device...\n");
-	OpenDeviceWithSelection(test, input);
+	apiPtr->Open(apiPtr->instance, input);
+
 	printf("Opening whistle.wav...\n");
 	OpenWavFile(file, "whistle.wav");
+
 	printf("Reading wav header...\n\n");
 	ReadWavHeader(file);
-	printf("\nSampling not yet implemented!\n");
+
 	printf("Closing...\n");
-	CloseDevice(test);
+	apiPtr->Close(apiPtr->instance);
+
 	printf("Destroying...\n");
-	DestroyOalApi(test);
+	apiPtr->Destroy(apiPtr->instance);
+	free(apiPtr);
 
 	printf("Testing threads...");
 	WIN32THREAD* thread = CreateWin32Thread();

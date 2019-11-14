@@ -17,8 +17,13 @@ set(SOURCES
 	Test.c
 	WindStream.c 
 	WindStream.h 
+	helpers.c
+	helpers.h
 	${BASE}/definitions.h
+
 	${APIH}/apihandler.h
+	${APIH}/apihandler.c
+	${APIH}/openal_apihandler.h
 	${APIH}/openal_apihandler.c 
 	
 	${THREADH}/threadhandler.h
