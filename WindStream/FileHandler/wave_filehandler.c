@@ -1,11 +1,41 @@
-#include "wav_filestructure.h"
-#include "wav_filehandler.h"
+#include <stdint.h>
+#include "wave_filehandler.h"
+#include "../helpers.h"
 
-typedef struct wav_file {
+typedef struct riff_chunk {
+	byte ChunkId[5];
+	uint32_t ChunkSize;
+	byte Format[5];
+} RiffChunk;
+
+typedef struct fmt_chunk {
+	byte Subchunk1ID[5];
+	uint32_t Subchunk1Size;
+	uint16_t AudioFormat;
+	uint16_t NumChannels;
+	uint32_t SampleRate;
+	uint32_t ByteRate;
+	uint16_t BlockAlign;
+	uint16_t BitsPerSample;
+	// Extension Data goes here
+} FmtChunk;
+
+typedef struct data_chunk {
+	byte Subchunk2ID[5];
+	uint32_t Subchunk2Size;
+} DataChunk;
+
+typedef struct wave_header {
+	RiffChunk* riff;
+	FmtChunk* fmt;
+	DataChunk* data;
+} WaveHeader;
+
+typedef struct wave_file {
 	char* fileName;
 	FILE* fp;
 	byte fileState;
-	WAVHEADER* header;
+	WaveHeader* header;
 
 	unsigned long totalSamples;
 	float* data;
@@ -15,27 +45,24 @@ typedef struct wav_file {
 	long decodedCount;
 	long pointOnDataArray;
 	
-	void (*ReadSamples)(WAVFILE*, long);
-} WAVFILE;
+	float* (*ReadSamples)(WaveFile*, long);
+} WaveFile;
 
-void ReadSamplesSize8(WAVFILE*, long);
-void ReadSamplesSize16(WAVFILE*, long);
-void ReadSamplesSize32(WAVFILE*, long);
-bool ReadRiffChunk(WAVFILE*);
-int ReadFmtChunk(WAVFILE*);
-bool ReadDataChunk(WAVFILE*);
+void ReadSamplesSize8(WaveFile*, long);
+void ReadSamplesSize16(WaveFile*, long);
+void ReadSamplesSize32(WaveFile*, long);
+bool ReadRiffChunk(WaveFile*);
+int  ReadFmtChunk(WaveFile*);
+bool ReadDataChunk(WaveFile*);
 void ReadCString(FILE*, char*, int);
 
-WAVFILE* CreateWavFile() {
-	WAVFILE* newFile = malloc(sizeof(WAVFILE));
-	if (newFile == NULL) {
-		//Error
-		return NULL;
-	}
+WaveFile* Wave_CreateInstance() {
+	WaveFile* newFile = Cmalloc(sizeof(WaveFile), "WaveFile.File", FALSE);
+	if (!newFile) return NULL;
 
 	newFile->fp = NULL;
 	newFile->fileState = UNSET;
-	newFile->header = malloc(sizeof(WAVHEADER));
+	newFile->header = Cmalloc(sizeof(WaveHeader), "WaveFile.Header", FALSE);
 
 	if (newFile->header == NULL) {
 		// Error
@@ -43,16 +70,16 @@ WAVFILE* CreateWavFile() {
 		return NULL;
 	}
 
-	newFile->header->riff = malloc(sizeof(RIFFCHUNK));
-	newFile->header->fmt = malloc(sizeof(FMTCHUNK));
-	newFile->header->data = malloc(sizeof(DATACHUNK));
+	newFile->header->riff = malloc(sizeof(RiffChunk));
+	newFile->header->fmt = malloc(sizeof(FmtChunk));
+	newFile->header->data = malloc(sizeof(DataChunk));
 
 	// TO-DO: Check for errors
 
 	return newFile;
 }
 
-void OpenWavFile(WAVFILE* ptr, char* filename) {
+void Wave_OpenFile(WaveFile* ptr, char* filename) {
 	if (filename == NULL) {
 		//Print error
 		return;
@@ -65,12 +92,13 @@ void OpenWavFile(WAVFILE* ptr, char* filename) {
 		return;
 	}
 
+	size_t byteCount = sizeof(char) * (strlen(filename) + 1);
 	ptr->fileState = OPEN;
-	ptr->fileName = malloc(sizeof(char) * (strlen(filename) + 1));
+	ptr->fileName = Cmalloc(byteCount, "Wave.OpenFile", TRUE);
 	strcpy(ptr->fileName, filename);
 }
 
-void ReadWavHeader(WAVFILE* ptr) {
+void Wave_ReadHeader(WaveFile* ptr) {
 	if (ptr->fileState != OPEN) return;
 
 	if (ReadRiffChunk(ptr) == FALSE) return;
@@ -85,9 +113,9 @@ void ReadWavHeader(WAVFILE* ptr) {
 	return;
 }
 
-void SetupWavFile(WAVFILE* ptr) {
-	FMTCHUNK* fmt = ptr->header->fmt;
-	DATACHUNK* data = ptr->header->data;
+void Wave_SetupInstance(WaveFile* ptr, int milliseconds) {
+	FmtChunk* fmt = ptr->header->fmt;
+	DataChunk* data = ptr->header->data;
 
 	ptr->totalSamples = data->Subchunk2Size / (fmt->BitsPerSample / 8);
 	ptr->data = malloc(sizeof(float) * ptr->totalSamples);
@@ -95,29 +123,25 @@ void SetupWavFile(WAVFILE* ptr) {
 	ptr->decodedCount = 0;
 
 	if (fmt->BitsPerSample == 8) {
-		//ptr->wArray = malloc
-		//ptr->ReadSamples = ReadSamplesSize8;
-	}
-	else if (fmt->BitsPerSample == 16) {
+		ptr->ReadSamples = ReadSamplesSize8;
+	} else if (fmt->BitsPerSample == 16) {
 		ptr->ReadSamples = ReadSamplesSize16;
-	}
-	else if (fmt->BitsPerSample == 32) {
+	} else if (fmt->BitsPerSample == 32) {
 		ptr->ReadSamples = ReadSamplesSize32;
-	}
-	else {
+	} else {
 		// Error out.
 		return;
 	}
 }
 
-void ReadWavSamples(WAVFILE* ptr) {
+void Wave_ReadSamples(WaveFile* ptr) {
 	long count = min(ptr->totalSamples - ptr->decodedCount, ptr->wArrayLength);
 	ptr->ReadSamples(ptr, count);
 }
 
-void PrintWavFileInfo(WAVFILE* ptr) {
-	RIFFCHUNK* riff = ptr->header->riff;
-	FMTCHUNK* fmt = ptr->header->fmt;
+void Wave_PrintInfo(WaveFile* ptr) {
+	RiffChunk* riff = ptr->header->riff;
+	FmtChunk* fmt = ptr->header->fmt;
 
 	printf("\nFile:\n");
 	printf("File Name: %s\n", ptr->fileName);
@@ -144,11 +168,20 @@ void PrintWavFileInfo(WAVFILE* ptr) {
 /// Private Functions ///
 /////////////////////////
 
-void ReadSamplesSize8(WAVFILE* ptr, long count) {
-	
+void ReadSamplesSize8(WaveFile* ptr, long count) {
+	int8_t* wArray = ptr->wArray;
+
+	// May need to take lock, doc.
+	fread(wArray, sizeof(int8_t), count, ptr->fp);
+
+	for (long i = 0; i < count; i++) {
+		ptr->data[ptr->pointOnDataArray + i] = (wArray[i] / (float)SIGNEDBYTEMAX);
+	}
+
+	return;
 }
 
-void ReadSamplesSize16(WAVFILE* ptr, long count) {
+void ReadSamplesSize16(WaveFile* ptr, long count) {
 	short* wArray = ptr->wArray;
 	
 	// May need to take lock, doc.
@@ -161,7 +194,7 @@ void ReadSamplesSize16(WAVFILE* ptr, long count) {
 	return;
 }
 
-void ReadSamplesSize32(WAVFILE* ptr, long count) {
+void ReadSamplesSize32(WaveFile* ptr, long count) {
 	float* wArray = ptr->wArray;
 
 	fread(wArray, sizeof(float), count, ptr->fp);
@@ -169,8 +202,8 @@ void ReadSamplesSize32(WAVFILE* ptr, long count) {
 	return;
 }
 
-bool ReadRiffChunk(WAVFILE* ptr) {
-	RIFFCHUNK* riff = ptr->header->riff;
+bool ReadRiffChunk(WaveFile* ptr) {
+	RiffChunk* riff = ptr->header->riff;
 
 	ReadCString(ptr->fp, riff->ChunkId, 4);
 	if (strcmp("RIFF", riff->ChunkId) != 0) {
@@ -189,8 +222,8 @@ bool ReadRiffChunk(WAVFILE* ptr) {
 	return TRUE;
 }
 
-bool ReadFmtChunk(WAVFILE* ptr) {
-	FMTCHUNK* fmt = ptr->header->fmt;
+bool ReadFmtChunk(WaveFile* ptr) {
+	FmtChunk* fmt = ptr->header->fmt;
 
 	ReadCString(ptr->fp, fmt->Subchunk1ID, 4);
 	if (strcmp("fmt ", fmt->Subchunk1ID) != 0) {
@@ -209,8 +242,8 @@ bool ReadFmtChunk(WAVFILE* ptr) {
 	return TRUE;
 }
 
-bool ReadDataChunk(WAVFILE* ptr) {
-	DATACHUNK* data = ptr->header->data;
+bool ReadDataChunk(WaveFile* ptr) {
+	DataChunk* data = ptr->header->data;
 	ReadCString(ptr->fp, data->Subchunk2ID, 4);
 	if (strcmp("data", data->Subchunk2ID) != 0) {
 		printf("Error: Subchunk2ID is not data.\nSubchunk2ID: %s\n", data->Subchunk2ID);

@@ -31,9 +31,8 @@ set(SOURCES
 	${THREADH}/win32_threadhandler.h
 	
 	${FILEH}/filehandler.h 
-	${FILEH}/wav_filestructure.h
-	${FILEH}/wav_filehandler.h 
-	${FILEH}/wav_filehandler.c)
+	${FILEH}/wave_filehandler.h 
+	${FILEH}/wave_filehandler.c)
 
 add_executable (WindStream ${SOURCES})
 

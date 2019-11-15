@@ -7,12 +7,12 @@
 #ifndef __WAVFILEHANDLER__INCLUDED__
 #define __WAVFILEHANDLER__INCLUDED__
 
-typedef struct wav_file WAVFILE;
+typedef struct wave_file WaveFile;
 
-WAVFILE* CreateWavFile();
-void OpenWavFile(WAVFILE*, char*);
-void ReadWavHeader(WAVFILE*);
-void SetupWavFile(WAVFILE*);
-void PrintWavFileInfo(WAVFILE*);
+WaveFile* Wave_CreateInstance();
+void Wave_OpenFile(WaveFile*, char*);
+void Wave_ReadHeader(WaveFile*);
+void Wave_SetupInstance(WaveFile*);
+void Wave_PrintInfo(WaveFile*);
 
 #endif // !__WAVFILEHANDLER__INCLUDED__

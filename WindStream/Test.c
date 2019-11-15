@@ -1,6 +1,6 @@
 #include "WindStream.h"
 #include "APIHandler/apihandler.h"
-#include "FileHandler/wav_filehandler.h"
+#include "FileHandler/wave_filehandler.h"
 #include "ThreadHandler/win32_threadhandler.h"
 
 void testFunction(void* test) {
@@ -10,7 +10,7 @@ void testFunction(void* test) {
 }
 
 int main() {
-	WAVFILE* file = CreateWavFile();
+	WaveFile* file = CreateWavFile();
 	ApiHandler* apiPtr = CreateInstance(OpenAL);
 	int count = apiPtr->Get_Devices(apiPtr->instance);
 	int input;

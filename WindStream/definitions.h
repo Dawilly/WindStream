@@ -12,5 +12,6 @@ typedef unsigned char byte;
 #define max(a,b) (a > b ? a : b)
 
 #define SIGNEDSHORTMAX 32767
+#define SIGNEDBYTEMAX 127
 
 #endif // !__DEFINITIONS__INCLUDED__
