@@ -10,9 +10,13 @@
 typedef struct wave_file WaveFile;
 
 WaveFile* Wave_CreateInstance();
-void Wave_OpenFile(WaveFile*, char*);
+void Wave_OpenFile(WaveFile*, const char*);
+void Wave_CloseFile(WaveFile*);
 void Wave_ReadHeader(WaveFile*);
 void Wave_SetupInstance(WaveFile*);
 void Wave_PrintInfo(WaveFile*);
+float* Wave_GetDataBuffer(WaveFile*);
+unsigned long Wave_GetTotalSamples(WaveFile*);
+void Wave_ResetPosition(WaveFile*);
 
 #endif // !__WAVFILEHANDLER__INCLUDED__

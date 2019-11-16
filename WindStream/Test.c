@@ -10,7 +10,7 @@ void testFunction(void* test) {
 }
 
 int main() {
-	WaveFile* file = CreateWavFile();
+	WaveFile* file = Wave_CreateInstance();
 	ApiHandler* apiPtr = CreateInstance(OpenAL);
 	int count = apiPtr->Get_Devices(apiPtr->instance);
 	int input;
@@ -25,11 +25,11 @@ int main() {
 	apiPtr->Open(apiPtr->instance, input);
 
 	printf("Opening whistle.wav...\n");
-	OpenWavFile(file, "whistle.wav");
+	Wave_OpenFile(file, "whistle.wav");
 
 	printf("Reading wav header...\n\n");
-	ReadWavHeader(file);
-
+	Wave_ReadHeader(file);
+	Wave_PrintInfo(file);
 	printf("Closing...\n");
 	apiPtr->Close(apiPtr->instance);
 

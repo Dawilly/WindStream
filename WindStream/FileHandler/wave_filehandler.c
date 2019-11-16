@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include "wave_filehandler.h"
 #include "../helpers.h"
+#include <math.h>
 
 typedef struct riff_chunk {
 	byte ChunkId[5];
@@ -38,6 +39,7 @@ typedef struct wave_file {
 	WaveHeader* header;
 
 	unsigned long totalSamples;
+	// Data array may need to be bytes, not floats.
 	float* data;
 	void* wArray;
 	long wArrayLength;
@@ -45,15 +47,15 @@ typedef struct wave_file {
 	long decodedCount;
 	long pointOnDataArray;
 	
-	float* (*ReadSamples)(WaveFile*, long);
+	void (*ReadSamples)(WaveFile*, long);
 } WaveFile;
 
-void ReadSamplesSize8(WaveFile*, long);
-void ReadSamplesSize16(WaveFile*, long);
-void ReadSamplesSize32(WaveFile*, long);
-bool ReadRiffChunk(WaveFile*);
-int  ReadFmtChunk(WaveFile*);
-bool ReadDataChunk(WaveFile*);
+void wave_ReadSamplesSize8(WaveFile*, long);
+void wave_ReadSamplesSize16(WaveFile*, long);
+void wave_ReadSamplesSize32(WaveFile*, long);
+bool wave_ReadRiffChunk(WaveFile*);
+int  wave_ReadFmtChunk(WaveFile*);
+bool wave_ReadDataChunk(WaveFile*);
 void ReadCString(FILE*, char*, int);
 
 WaveFile* Wave_CreateInstance() {
@@ -79,7 +81,7 @@ WaveFile* Wave_CreateInstance() {
 	return newFile;
 }
 
-void Wave_OpenFile(WaveFile* ptr, char* filename) {
+void Wave_OpenFile(WaveFile* ptr, const char* filename) {
 	if (filename == NULL) {
 		//Print error
 		return;
@@ -98,17 +100,24 @@ void Wave_OpenFile(WaveFile* ptr, char* filename) {
 	strcpy(ptr->fileName, filename);
 }
 
+void Wave_CloseFile(WaveFile* ptr) {
+	if (fclose(ptr->fp) == 0) {
+		ptr->fileState = CLOSED;
+	}
+	return;
+}
+
 void Wave_ReadHeader(WaveFile* ptr) {
 	if (ptr->fileState != OPEN) return;
 
-	if (ReadRiffChunk(ptr) == FALSE) return;
+	if (wave_ReadRiffChunk(ptr) == FALSE) return;
 
-	if (ReadFmtChunk(ptr) == FALSE) return;
+	if (wave_ReadFmtChunk(ptr) == FALSE) return;
 
 	// This is temp. For now the focus is SubChunk1Size = 16
 	if (ptr->header->fmt->Subchunk1Size != 16) return;
 
-	if (ReadDataChunk(ptr) == FALSE) return;
+	if (wave_ReadDataChunk(ptr) == FALSE) return;
 
 	return;
 }
@@ -116,27 +125,56 @@ void Wave_ReadHeader(WaveFile* ptr) {
 void Wave_SetupInstance(WaveFile* ptr, int milliseconds) {
 	FmtChunk* fmt = ptr->header->fmt;
 	DataChunk* data = ptr->header->data;
+	size_t byteCount;
 
 	ptr->totalSamples = data->Subchunk2Size / (fmt->BitsPerSample / 8);
 	ptr->data = malloc(sizeof(float) * ptr->totalSamples);
 	ptr->startingPosOfFile = ftell(ptr->fp);
 	ptr->decodedCount = 0;
+	ptr->pointOnDataArray = 0;
+
+	double seconds = milliseconds / 1000.0;
+	ptr->wArrayLength = floor(seconds * ptr->header->fmt->SampleRate);
 
 	if (fmt->BitsPerSample == 8) {
-		ptr->ReadSamples = ReadSamplesSize8;
+		byteCount = sizeof(int8_t) * ptr->wArrayLength;
+		ptr->ReadSamples = wave_ReadSamplesSize8;
 	} else if (fmt->BitsPerSample == 16) {
-		ptr->ReadSamples = ReadSamplesSize16;
+		byteCount = sizeof(short) * ptr->wArrayLength;
+		ptr->ReadSamples = wave_ReadSamplesSize16;
 	} else if (fmt->BitsPerSample == 32) {
-		ptr->ReadSamples = ReadSamplesSize32;
+		byteCount = sizeof(float) * ptr->wArrayLength;
+		ptr->ReadSamples = wave_ReadSamplesSize32;
 	} else {
 		// Error out.
 		return;
 	}
+
+	ptr->wArray = Cmalloc(sizeof(byteCount), "Wave.Setup", TRUE);
+	return;
 }
 
 void Wave_ReadSamples(WaveFile* ptr) {
 	long count = min(ptr->totalSamples - ptr->decodedCount, ptr->wArrayLength);
 	ptr->ReadSamples(ptr, count);
+}
+
+float* Wave_GetDataBuffer(WaveFile* ptr) {
+	return ptr->data;
+}
+
+unsigned long Wave_GetTotalSamples(WaveFile* ptr) {
+	return ptr->totalSamples;
+}
+
+void Wave_ResetPosition(WaveFile* ptr) {
+	if (fseek(ptr->fp, ptr->startingPosOfFile, SEEK_SET) == 0) {
+		ptr->decodedCount = 0;
+		ptr->pointOnDataArray = 0;
+	} else {
+		fprintf(stderr, "Unable to reset file position for: %s\n", ptr->fileName);
+	}
+	return;
 }
 
 void Wave_PrintInfo(WaveFile* ptr) {
@@ -168,7 +206,7 @@ void Wave_PrintInfo(WaveFile* ptr) {
 /// Private Functions ///
 /////////////////////////
 
-void ReadSamplesSize8(WaveFile* ptr, long count) {
+void wave_ReadSamplesSize8(WaveFile* ptr, long count) {
 	int8_t* wArray = ptr->wArray;
 
 	// May need to take lock, doc.
@@ -178,10 +216,12 @@ void ReadSamplesSize8(WaveFile* ptr, long count) {
 		ptr->data[ptr->pointOnDataArray + i] = (wArray[i] / (float)SIGNEDBYTEMAX);
 	}
 
+	ptr->pointOnDataArray += count;
+
 	return;
 }
 
-void ReadSamplesSize16(WaveFile* ptr, long count) {
+void wave_ReadSamplesSize16(WaveFile* ptr, long count) {
 	short* wArray = ptr->wArray;
 	
 	// May need to take lock, doc.
@@ -191,18 +231,22 @@ void ReadSamplesSize16(WaveFile* ptr, long count) {
 		ptr->data[ptr->pointOnDataArray + i] = (wArray[i] / (float)SIGNEDSHORTMAX);
 	}
 
+	ptr->pointOnDataArray += count;
+
 	return;
 }
 
-void ReadSamplesSize32(WaveFile* ptr, long count) {
+void wave_ReadSamplesSize32(WaveFile* ptr, long count) {
 	float* wArray = ptr->wArray;
 
 	fread(wArray, sizeof(float), count, ptr->fp);
 	
+	ptr->pointOnDataArray += count;
+
 	return;
 }
 
-bool ReadRiffChunk(WaveFile* ptr) {
+bool wave_ReadRiffChunk(WaveFile* ptr) {
 	RiffChunk* riff = ptr->header->riff;
 
 	ReadCString(ptr->fp, riff->ChunkId, 4);
@@ -222,7 +266,7 @@ bool ReadRiffChunk(WaveFile* ptr) {
 	return TRUE;
 }
 
-bool ReadFmtChunk(WaveFile* ptr) {
+bool wave_ReadFmtChunk(WaveFile* ptr) {
 	FmtChunk* fmt = ptr->header->fmt;
 
 	ReadCString(ptr->fp, fmt->Subchunk1ID, 4);
@@ -242,7 +286,7 @@ bool ReadFmtChunk(WaveFile* ptr) {
 	return TRUE;
 }
 
-bool ReadDataChunk(WaveFile* ptr) {
+bool wave_ReadDataChunk(WaveFile* ptr) {
 	DataChunk* data = ptr->header->data;
 	ReadCString(ptr->fp, data->Subchunk2ID, 4);
 	if (strcmp("data", data->Subchunk2ID) != 0) {

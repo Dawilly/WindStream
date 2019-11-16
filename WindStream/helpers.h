@@ -5,7 +5,7 @@
 #ifndef __INCLUDED__HELPERS__
 #define __INCLUDED__HELPERS__
 
-void* Cmalloc(size_t, char*, bool);
+void* Cmalloc(size_t, const char*, bool);
 void  ScanForIntInRange(FILE*, int*, int, int);
 
 #endif 

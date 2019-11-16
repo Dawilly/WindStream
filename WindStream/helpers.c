@@ -2,7 +2,7 @@
 
 void printError(FILE*);
 
-void* Cmalloc(size_t bytes, char* caller, bool isRequired) {
+void* Cmalloc(size_t bytes, const char* caller, bool isRequired) {
 	void* results = malloc(bytes);
 	if (results == 0) {
 		fprintf(stderr, "Unable to allocate memory.\nByte count: %llu\tCaller: %s\n", bytes, caller);
