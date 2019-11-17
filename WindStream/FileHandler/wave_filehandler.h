@@ -18,5 +18,6 @@ void Wave_PrintInfo(WaveFile*);
 float* Wave_GetDataBuffer(WaveFile*);
 unsigned long Wave_GetTotalSamples(WaveFile*);
 void Wave_ResetPosition(WaveFile*);
+void Wave_DestroyInstance(WaveFile*);
 
 #endif // !__WAVFILEHANDLER__INCLUDED__

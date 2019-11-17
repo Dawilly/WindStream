@@ -1,6 +1,6 @@
 #include "WindStream.h"
 #include "APIHandler/apihandler.h"
-#include "FileHandler/wave_filehandler.h"
+#include "FileHandler/filehandler.h"
 #include "ThreadHandler/win32_threadhandler.h"
 
 void testFunction(void* test) {
@@ -10,8 +10,9 @@ void testFunction(void* test) {
 }
 
 int main() {
-	WaveFile* file = Wave_CreateInstance();
-	ApiHandler* apiPtr = CreateInstance(OpenAL);
+
+	FileHandler* file = File_CreateInstance(Wave);
+	ApiHandler* apiPtr = Api_CreateInstance(OpenAL);
 	int count = apiPtr->Get_Devices(apiPtr->instance);
 	int input;
 
@@ -25,17 +26,19 @@ int main() {
 	apiPtr->Open(apiPtr->instance, input);
 
 	printf("Opening whistle.wav...\n");
-	Wave_OpenFile(file, "whistle.wav");
+	file->Open(file->instance, "whistle.wav");
 
 	printf("Reading wav header...\n\n");
-	Wave_ReadHeader(file);
-	Wave_PrintInfo(file);
+	file->ReadHeader(file->instance);
+	file->PrintInfo(file->instance);
 	printf("Closing...\n");
 	apiPtr->Close(apiPtr->instance);
 
 	printf("Destroying...\n");
 	apiPtr->Destroy(apiPtr->instance);
 	free(apiPtr);
+	file->Destroy(file->instance);
+	free(file);
 
 	printf("Testing threads...");
 	WIN32THREAD* thread = CreateWin32Thread();

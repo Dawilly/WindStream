@@ -5,8 +5,8 @@
 
 ApiHandler* CreateOpenALInstance(ApiHandler*);
 
-ApiHandler* CreateInstance(ApiType apiType) {
-	ApiHandler* newHandler = Cmalloc(sizeof(ApiHandler), "ApiHandler.CreateInstance", TRUE);
+ApiHandler* Api_CreateInstance(ApiType apiType) {
+	ApiHandler* newHandler = Cmalloc(sizeof(ApiHandler), "ApiHandler.CreateApiInstance", TRUE);
 
 	switch (apiType) {
 		case Auto:

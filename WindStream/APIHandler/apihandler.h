@@ -17,6 +17,6 @@ typedef struct api_handler {
 	void  (*PrintDevices)(void*);
 } ApiHandler;
 
-ApiHandler* CreateInstance(ApiType);
+ApiHandler* Api_CreateInstance(ApiType);
 
 #endif // !__APIHANDLER__INCLUDED__

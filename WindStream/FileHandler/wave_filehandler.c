@@ -177,6 +177,34 @@ void Wave_ResetPosition(WaveFile* ptr) {
 	return;
 }
 
+void Wave_DestroyInstance(WaveFile* ptr) {
+	if (ptr->fp != NULL) {
+		fclose(ptr->fp);
+		ptr->fp = NULL;
+	}
+
+	DataChunk* data = ptr->header->data;
+	FmtChunk* fmt = ptr->header->fmt;
+	RiffChunk* riff = ptr->header->riff;
+
+	free(ptr->fileName);
+	free(ptr->data);
+	free(ptr->wArray);
+
+	free(riff->ChunkId);
+	free(riff->Format);
+	free(riff);
+
+	free(fmt->Subchunk1ID);
+	free(fmt);
+	
+	free(data->Subchunk2ID);
+	free(data);
+	
+	free(ptr->header);
+	free(ptr);
+}
+
 void Wave_PrintInfo(WaveFile* ptr) {
 	RiffChunk* riff = ptr->header->riff;
 	FmtChunk* fmt = ptr->header->fmt;
